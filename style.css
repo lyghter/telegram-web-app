@@ -1,0 +1,174 @@
+
+
+
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0D1117;
+  color: #fff;
+  min-width: 0;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+  min-width: 0;
+}
+
+.app-container {
+  height: 100%;
+  width: 100%;
+  max-width: 50vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1px 5px 5px 5px;
+  box-sizing: border-box;
+  min-width: 0;
+  
+  /*justify-content: space-between*/
+}
+
+.progress {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+  
+.progress-text {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.question {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.question-text {
+  width: 100%;
+  height: 80px;
+  background-color: #0D1117;
+  /*border-radius: 12px;*/
+  padding: 5px;
+  font-size: 18px;
+  /*font-weight: bold;*/
+  text-align: center;
+  white-space: pre-wrap;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-break: break-word;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.answers {
+  padding: 0 0 0 0 ;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+}
+
+.row .answer-button {
+  flex: 1;
+  height: 44px;
+  border-radius: 12px;
+  border: none;
+  background-color: #262C36;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  word-break: break-word;
+  min-width: 0;
+}
+
+.answer-button.single-selected { background-color: #198754; }
+.answer-button.multi-selected { background-color: #0d6efd; }
+
+.navigation {
+  margin-top: auto;
+  display: flex;
+  width: 100%;
+  background-color: #0D1117;
+  box-sizing: border-box;
+}
+
+.nav-left, .nav-center, .nav-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 1;
+  min-width: 0;
+}
+  
+/*
+.nav-center {}
+  
+.nav-center-text {}  
+*/
+
+.back-button, .next-button {
+  width: 100%;
+  aspect-ratio: 1/1;
+  font-size: 20px;
+  border-radius: 12px;
+  border: none;
+  background-color: #262C36;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.next-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+  
+button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
