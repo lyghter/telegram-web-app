@@ -7,6 +7,12 @@ tg.onEvent('themeChanged', () => tg.setHeaderColor('#0D1117'));
 //tg.onEvent('viewportChanged', () => {
 //  document.getElementById('app-container').style.height = tg.viewportStableHeight + 'px';
 //});
+
+let v = document.getElementById("v");
+v.innerText = 'v22';
+
+let hw = document.getElementById("hw");
+hw.innerText = window.innerHeight+'x'+window.innerWidth;
   
 
 function guess() {}
