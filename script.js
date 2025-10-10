@@ -9,11 +9,12 @@ tg.onEvent('themeChanged', () => tg.setHeaderColor('#0D1117'));
 //});
 
 let v = document.getElementById("v");
-v.innerText = 'v22';
+v.innerText = 'v23';
+v.style.fontSize = '18px';
 
 let hw = document.getElementById("hw");
 hw.innerText = window.innerHeight+'x'+window.innerWidth;
-  
+hw.style.fontSize = '18px'; 
 
 function guess() {}
 
