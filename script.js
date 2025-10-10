@@ -9,7 +9,7 @@ tg.onEvent('themeChanged', () => tg.setHeaderColor('#0D1117'));
 //});
 
 let v = document.getElementById("v");
-v.innerText = 'v23';
+v.innerText = 'v24';
 v.style.fontSize = '18px';
 
 let hw = document.getElementById("hw");
@@ -82,10 +82,12 @@ function showQuestion(qLabel) {
     a.btn = document.createElement('button');
     a.btn.textContent = aText;
     a.btn.className = 'answer-button';
+    a.btn.style.visibility = 'hidden';
     if (a.picked) {
       a.btn.classList.add(`${q.type}-selected`);
     }
     a.btn.onclick = () => tapAnswer(q, a);
+    fitTextToButton(a.btn);
     if (row == a.row) {} else {
       answersContainer.appendChild(rowDiv);
       rowDiv = document.createElement('div');
@@ -96,6 +98,7 @@ function showQuestion(qLabel) {
   });
   answersContainer.appendChild(rowDiv);
 }
+
 function tapAnswer(q, a) {
   if (q.type === 'single') {
     if (a.picked) {
@@ -153,4 +156,135 @@ backButton.onclick = () => {
   }
 };
 
+
+function fitTextToButton(button, maxFontSize) {
+  const span = document.createElement("span");
+  span.style.visibility = "hidden";
+  span.style.whiteSpace = "nowrap";
+  span.style.position = "absolute";
+  span.style.font = window.getComputedStyle(button).font;
+  span.textContent = button.textContent;
+  document.body.appendChild(span);
+
+  const parentWidth = button.offsetWidth;
+  const style = window.getComputedStyle(button);
+  let fontSize = parseFloat(style.fontSize);
+
+  const minFont = 1;
+  const maxFont = maxFontSize; // ограничим разумный максимум
+
+  // если текст не помещается — уменьшаем шрифт
+  while (span.offsetWidth > parentWidth - 10 && fontSize > minFont) {
+    fontSize -= 0.5;
+    span.style.fontSize = fontSize + "px";
+  }
+
+  // если текст влезает и есть место — увеличиваем шрифт
+  while (span.offsetWidth < parentWidth - 20 && fontSize < maxFont) {
+    fontSize += 0.5;
+    span.style.fontSize = fontSize + "px";
+    if (span.offsetWidth > parentWidth - 10) {
+      fontSize -= 0.5;
+      break;
+    }
+  }
+
+  button.style.fontSize = fontSize + "px";
+  span.remove();
+  button.style.visibility = 'visible';
+}
+
+function fitTextByLongestLine(el, maxFontSize) {
+  const style = window.getComputedStyle(el);
+  let fontSize = parseFloat(style.fontSize);
+  const minFont = 0;
+  const maxFont = maxFontSize || fontSize;
+
+  const tempContainer = document.createElement("div");
+  tempContainer.style.position = "absolute";
+  tempContainer.style.visibility = "hidden";
+  tempContainer.style.width = el.offsetWidth + "px";
+  tempContainer.style.font = style.font;
+  tempContainer.style.lineHeight = style.lineHeight;
+  tempContainer.style.whiteSpace = "pre"; // сохраняем заранее заданные переносы
+  tempContainer.style.wordBreak = "normal";
+  document.body.appendChild(tempContainer);
+
+  const lines = el.textContent.split('\n');
+
+  let fits = false;
+
+  // Уменьшаем шрифт, если не помещается
+  while (!fits && fontSize > minFont) {
+    tempContainer.innerHTML = '';
+    tempContainer.style.fontSize = fontSize + "px";
+
+    fits = true;
+    lines.forEach(line => {
+      const span = document.createElement("span");
+      span.textContent = line;
+      tempContainer.appendChild(span);
+      if (span.offsetWidth > el.offsetWidth) fits = false;
+    });
+
+    if (!fits) fontSize -= 0.5;
+  }
+
+  // Увеличиваем шрифт, если есть место
+  let canIncrease = true;
+  while (canIncrease && fontSize < maxFont) {
+    fontSize += 0.5;
+    tempContainer.innerHTML = '';
+    tempContainer.style.fontSize = fontSize + "px";
+
+    canIncrease = true;
+    lines.forEach(line => {
+      const span = document.createElement("span");
+      span.textContent = line;
+      tempContainer.appendChild(span);
+      if (span.offsetWidth > el.offsetWidth) canIncrease = false;
+    });
+
+    if (!canIncrease) fontSize -= 0.5; // откат до последнего подходящего размера
+  }
+
+  el.style.fontSize = fontSize + "px";
+  document.body.removeChild(tempContainer);
+}
+
+
+
+
 showQuestion(qPresent);
+
+fitTextByLongestLine(questionText, 20);
+window.addEventListener(
+  "resize", () => fitTextByLongestLine(questionText, 20));
+
+const answers = document.querySelectorAll('#answersContainer .answer-button');
+answers.forEach(ans => fitTextToButton(ans, 18));
+window.addEventListener(
+  "resize", () => answers.forEach(ans => fitTextToButton(ans, 18)));
+
+fitTextToButton(backButton);
+window.addEventListener(
+  "resize", () => fitTextToButton(backButton, 20));
+
+fitTextToButton(nextButton);
+window.addEventListener(
+  "resize", () => fitTextToButton(nextButton, 20));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
