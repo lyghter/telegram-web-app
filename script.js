@@ -8,9 +8,9 @@ tg.onEvent('themeChanged', () => tg.setHeaderColor('#0D1117'));
 //  document.getElementById('app-container').style.height = tg.viewportStableHeight + 'px';
 //});
 
-let v = document.getElementById("v");
-v.innerText = 'v28';
-v.style.fontSize = '18px';
+//let v = document.getElementById("v");
+//v.innerText = 'v28';
+//v.style.fontSize = '18px';
 
 let hw = document.getElementById("hw");
 hw.innerText = window.innerHeight+'x'+window.innerWidth;
