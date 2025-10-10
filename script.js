@@ -9,7 +9,7 @@ tg.onEvent('themeChanged', () => tg.setHeaderColor('#0D1117'));
 //});
 
 let v = document.getElementById("v");
-v.innerText = 'v25';
+v.innerText = 'v26';
 v.style.fontSize = '18px';
 
 let hw = document.getElementById("hw");
