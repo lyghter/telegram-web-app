@@ -9,8 +9,8 @@ const nSize = [0,20];
 const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
-tg.setHeaderColor('bg_color');
-tg.setBottomBarColor('bg_color');
+tg.setHeaderColor('#0D1117');
+tg.setBottomBarColor('#0D1117');
 tg.onEvent('themeChanged', () => tg.setHeaderColor('#0D1117'));
 //tg.onEvent('viewportChanged', () => {
 //  document.getElementById('app-container').style.height = tg.viewportStableHeight + 'px';
