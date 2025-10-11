@@ -86,7 +86,7 @@ const profile = {
       'Europe': { row:2, next:['yourEurope']},
       'Asia': { row:2, next:['yourAsia'] },
       'Middle East': { row:3, next:['yourMENA']},
-      'South Caucasus': { row:3, next:['yourMENA']},
+      'Caucasus': { row:3, next:['yourMENA']},
       'Australia': { row:4, next:['yourOceania'] },
       'N.Zeland': { row:4, next:['yourOceania'] },
       'Pacific': { row:4, next:['yourAfrica']},
