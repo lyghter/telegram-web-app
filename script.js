@@ -79,18 +79,18 @@ const profile = {
     text: 'Where are you from?',
     type: 'single',
     answers: {
-      "I prefer not to say": { row:1, next:['yourOceania'] },
-      'North America': { row:2, next:['yourAmerica'] },
-      'Latin America': { row:2, next:['yourAmerica'] },
-      'Africa': { row:3, next:['yourAfrica']},
-      'Europe': { row:3, next:['yourEurope']},
-      'Asia': { row:3, next:['yourAsia'] },
+      "I prefer not to say": { row:5, next:['yourOceania'] },
+      'North America': { row:1, next:['yourAmerica'] },
+      'Latin America': { row:1, next:['yourAmerica'] },
+      'Africa': { row:2, next:['yourAfrica']},
+      'Europe': { row:2, next:['yourEurope']},
+      'Asia': { row:2, next:['yourAsia'] },
+      'Caucasus': { row:3, next:['yourMENA']},
+      'Middle East': { row:3, next:['yourMENA']},
+      'Australia': { row:4, next:['yourOceania'] },
+      'N.Zeland': { row:4, next:['yourOceania'] },
+      'Pacific': { row:4, next:['yourAfrica']},
       
-      'Caucasus': { row:4, next:['yourMENA']},
-      'Middle East': { row:4, next:['yourMENA']},
-      'Australia': { row:5, next:['yourOceania'] },
-      'N.Zeland': { row:5, next:['yourOceania'] },
-      'Pacific': { row:5, next:['yourAfrica']},
       
       
       
