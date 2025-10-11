@@ -75,6 +75,37 @@ const profile = {
         '70+': { row:4 },       
     },
   },
+  whereAreYouFrom: {
+    text: 'Where are you from?',
+    type: 'single',
+    answers: {
+      "I prefer not to say": { row:1, next:['yourOceania'] },
+      'North America': { row:2, next:['yourAmerica'] },
+      'Latin America': { row:2, next:['yourAmerica'] },
+      'Africa': { row:3, next:['yourAfrica']},
+      'Europe': { row:3, next:['yourEurope']},
+      'Asia': { row:3, next:['yourAsia'] },
+      
+      'Caucasus': { row:4, next:['yourMENA']},
+      'Middle East': { row:4, next:['yourMENA']},
+      'Australia': { row:5, next:['yourOceania'] },
+      'N.Zeland': { row:5, next:['yourOceania'] },
+      'Pacific': { row:5, next:['yourAfrica']},
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    },
+  }, 
   yourPartOfWorld: {
     text: 'Which part of the world\ndo you live in?',
     type: 'single',
@@ -349,7 +380,7 @@ hw.style.fontSize = '18px';
 resetProfile(profile);
   
 const qPast = [];
-let qPresent = 'yourPartOfWorld';
+let qPresent = 'whereAreYouFrom';
 const qFuture = [
   //'yourAge',
   //'theirGender',
