@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Adaptive Pixel Square — Correct Cyan+Magenta Mix</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background-color: black; /* черный фон */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    canvas {
+      image-rendering: pixelated; /* четкие пиксели */
+      display: block;
+      border: 2px solid #333;
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="px"></canvas>
+
+  <script>
+    const logicalSize = 100; // квадрат 1000×1000 пикселей
+    const canvas = document.getElementById('px');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = logicalSize;
+    canvas.height = logicalSize;
+
+    // 🎨 Цвета (RGBA)
+    const gray     = [0x26, 0x2C, 0x36, 255]; // #262C36
+    const cyan     = [0x00, 0xFF, 0xFF, 255]; // #00FFFF
+    const magenta  = [0xFF, 0x00, 0xFF, 255]; // #FF00FF
+    const mixColor = [0x80, 0x80, 0xFF, 255]; // #8080FF — смесь cyan + magenta = синий
+
+    // 📊 Вероятности
+    const probs = {
+      gray: 0.5,     // 50%
+      magenta: 0.15, // 15%
+      cyan: 0.3,     // 30%
+      mix: 0.05      // 5%
+    };
+
+    // 🎲 Случайный выбор цвета по вероятностям
+    function getRandomColor() {
+      const p = Math.random();
+      if (p < probs.gray) return gray;
+      if (p < probs.gray + probs.magenta) return magenta;
+      if (p < probs.gray + probs.magenta + probs.cyan) return cyan;
+      return mixColor;
+    }
+
+    // 🧱 Генерация пикселей
+    function generatePixels() {
+      const img = ctx.createImageData(logicalSize, logicalSize);
+      const data = img.data;
+
+      for (let i = 0; i < data.length; i += 4) {
+        const [r, g, b, a] = getRandomColor();
+        data[i] = r;
+        data[i + 1] = g;
+        data[i + 2] = b;
+        data[i + 3] = a;
+      }
+
+      ctx.putImageData(img, 0, 0);
+    }
+
+    // 📐 Масштабирование под окно
+    function resizeCanvas() {
+      const size = Math.min(window.innerWidth, window.innerHeight);
+      canvas.style.width = size + 'px';
+      canvas.style.height = size + 'px';
+    }
+
+    // 🔁 Перегенерация по клику
+    canvas.addEventListener('click', generatePixels);
+
+    // 🚀 Запуск
+    generatePixels();
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+  </script>
+</body>
+</html>

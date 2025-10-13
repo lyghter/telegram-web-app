@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Adaptive Pixel Square — Custom Colors</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 98%;
+      background-color: black; /* черный фон вокруг квадрата */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    canvas {
+      image-rendering: pixelated; /* без размытия при масштабировании */
+      display: block;
+      border: 2px solid #333;
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="px"></canvas>
+
+  <script>
+    const logicalSize = 100; // логический размер квадрата
+    const canvas = document.getElementById('px');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = logicalSize;
+    canvas.height = logicalSize;
+
+    // Цвета в формате RGBA
+    const gray   = [0x26, 0x2C, 0x36, 255]; // #262C36
+    const yellow = [255, 255, 0, 255];      // #FFFF00
+    const blue   = [0, 128, 255, 255];      // #0080FF
+    const green  = [0x19, 0x87, 0x54, 255]; // #198754
+
+    // Вероятности (сумма = 1)
+    const probs = {
+      gray: 0.5,
+      yellow: 0.15,
+      blue: 0.3,
+      green: 0.05
+    };
+
+    // Выбор случайного цвета по вероятности
+    function getRandomColor() {
+      const p = Math.random();
+      if (p < probs.gray) return gray;
+      if (p < probs.gray + probs.yellow) return yellow;
+      if (p < probs.gray + probs.yellow + probs.blue) return blue;
+      return green;
+    }
+
+    // Генерация квадратного изображения
+    function generatePixels() {
+      const img = ctx.createImageData(logicalSize, logicalSize);
+      const data = img.data;
+
+      for (let i = 0; i < data.length; i += 4) {
+        const [r, g, b, a] = getRandomColor();
+        data[i] = r;
+        data[i + 1] = g;
+        data[i + 2] = b;
+        data[i + 3] = a;
+      }
+
+      ctx.putImageData(img, 0, 0);
+    }
+
+    // Масштабирование под размер окна
+    function resizeCanvas() {
+      const size = Math.min(window.innerWidth, window.innerHeight);
+      canvas.style.width = size + 'px';
+      canvas.style.height = size + 'px';
+    }
+
+    // Перегенерация при клике
+    canvas.addEventListener('click', generatePixels);
+
+    // Инициализация
+    generatePixels();
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+  </script>
+</body>
+</html>

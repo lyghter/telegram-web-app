@@ -1,11 +1,5 @@
 
 
-
-const qSize = [0,20];
-const aSize = [0,18];
-const nSize = [0,20];
-
-
 const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
@@ -20,167 +14,103 @@ tg.onEvent('themeChanged', () => tg.setHeaderColor('#0D1117'));
 //v.innerText = 'v28';
 //v.style.fontSize = '18px';
 
+const qSize = [0,20];
+const aSize = [0,18];
+const nSize = [0,20];
+
+const qPast = [];
+let qPresent = 'whereDoYouLive';
+const qFuture = [];
+
 const profile = {
-  yourGender: {
-    text: 'Who are you?',
-    type: 'single', 
-    answers: {
-      '♀': { row:1 },
-      '♂': { row:1 },
-      
-    },
-  },
-  theirGender: {
-    text: 'Who would you like to chat with?',
-    type: 'multi', 
-    answers: {
-      '♀': { row:1 },
-      '♂': { row:1 },
-      
-    },
-  },
-  yourAge: {
-    text: 'Your age',
-    type: 'single', 
-    answers: {
-      '18-21': { row:1 },
-      '22-25': { row:1 },
-      '26-29': { row:1 },
-        '30-34': { row:2 },
-        '35-39': { row:2 },
-        '40-44': { row:2 },
-      '45-49': { row:3 },
-      '50-54': { row:3 },
-      '55-59': { row:3 },
-        '60-64': { row:4 },
-        '64-69': { row:4 },
-        '70+': { row:4 },       
-    },
-  },
-  theirAge: {
-    text: 'Their age',
-    type: 'multi', 
-    answers: {
-      '18-21': { row:1 },
-      '22-25': { row:1 },
-      '26-29': { row:1 },
-        '30-34': { row:2 },
-        '35-39': { row:2 },
-        '40-44': { row:2 },
-      '45-49': { row:3 },
-      '50-54': { row:3 },
-      '55-59': { row:3 },
-        '60-64': { row:4 },
-        '64-69': { row:4 },
-        '70+': { row:4 },       
-    },
-  },
-  whereAreYouFrom: {
-    text: 'Where are you from?',
-    type: 'single',
-    answers: {
-      "I prefer not to say": { row:5, next:['yourOceania'] },
-      'North America': { row:1, next:['yourAmerica'] },
-      'Latin America': { row:1, next:['yourAmerica'] },
-      'Africa': { row:2, next:['yourAfrica']},
-      'Europe': { row:2, next:['yourEurope']},
-      'Asia': { row:2, next:['yourAsia'] },
-      'Middle East': { row:3, next:['yourMENA']},
-      'Caucasus': { row:3, next:['yourMENA']},
-      'Australia': { row:4, next:['yourOceania'] },
-      'N.Zeland': { row:4, next:['yourOceania'] },
-      'Pacific': { row:4, next:['yourAfrica']},
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-    },
-  }, 
-  yourPartOfWorld: {
-    text: 'Which part of the world\ndo you live in?',
-    type: 'single',
-    answers: {
-      'Asia': { row:1, next:['yourAsia'] },
-      'The Americas': { row:2, next:['yourAmerica'] },
-      'Europe & Caucasus': { row:3, next:['yourEurope']},
-      'Middle East & North Africa': { row:4, next:['yourMENA']},
-      'Sub-Saharan Africa': { row:5, next:['yourAfrica']},
-      'Australia & Oceania': { row:6, next:['yourOceania'] },
-      "I'm a global nomad": { row:7, next:['yourOceania'] },
-      "I prefer not to say": { row:8, next:['yourOceania'] },
-    },
-  },  
-  yourWorld: {
+  whereDoYouLive1: {
     text: 'Where do you live?',
     type: 'single',
     answers: {
-      'ASIA': { row:1, next:['yourAsia'] },
-      'AMERICA': { row:2, next:['yourAmerica'] },
-      'EUROPE & EX-USSR': { row:3, next:['yourEurope']},
-      'MIDDLE EAST & NORTH AFRICA': { row:4, next:['yourMENA']},
-      'SUB-SAHARAN AFRICA': { row:5, next:['yourAfrica']},
-      'OCEANIA': { row:6, next:['yourOceania'] },
-    },
-  },
-  yourAsia: {
-    text: 'Which part of Asia do you live in?',
-    type: 'single',
-    answers: {
-      'Central Asia': { row:1, next:['']},
-      'South Asia': { row:2, },
-      'Southeast Asia': { row:3, },
-      'East Asia': { row:4, },
-    },
-  },
-  yourAmerica: {
-    text: 'Which of the Americas do you live in?',
-    type: 'single',
-    answers: {
-      'North America': { row:1, },
-      'Latin America': { row:2, },
-    },
-  },
-  yourEurope: {
-    text: 'Which country do you live in?',
-    type: 'single',
-    answers: {
-      '1': { row:1, flag:''},
-      '2': { row:2, flag:''},
+      'Africa': { row:1, next:'yourAfrica'},
+      'America': { row:2, next:'yourAmerica' },
+      'Eurasia': { row:3, next:'yourEurasia'},
+      'Oceania': { row:4, next:'yourOceania' },
+      "I'm global nomad": { row:5, next:'q'},
+      //"I prefer not to say": { row:6, next:'q' },  
     },
   }, 
-  yourMENA: {
-    text: 'Which country do you live in?',
+  whereDoYouLive: {
+    text: 'Where do you live?',
     type: 'single',
     answers: {
-      '1': { row:1, flag:''},
-      '2': { row:2, flag:''},
+      'Africa': { row:1, next:'yourAfrica'},
+      'America': { row:1, next:'yourAmerica' },
+      'Eurasia': { row:1, next:'yourEurasia'},
+      'Oceania': { row:1, next:'yourOceania' },
+      "I'm global nomad": { row:5, next:'q'},
+      //"I prefer not to say": { row:6, next:'q' },  
+    },
+  }, 
+  yourAfrica: {
+    text: 'Which part of Africa\ndo you live in?',
+    type: 'multi',
+    answers: {
+      'Eastern Africa': { row:1, next:'yourEasternAfrica'},
+      'Middle Africa': { row:2, next:'yourMiddleAfrica'},
+      'Northern Africa': { row:3, },
+      'Southern Africa': { row:4, },
+      'Western Africa': { row:5, },
+      "I prefer not to say": { row:6, next:'q' },  
     },
   },
-  yourAfrica: {
-    text: 'Which country do you live in?',
+  yourEasternAfrica: {
+    text: 'Which country\ndo you live in?',
     type: 'single',
     answers: {
-      '1': { row:1, flag:''},
-      '2': { row:2, flag:''},
-    },  
+      'a': { row:1, },
+      'b': { row:2, },
+      'c': { row:3, },
+    },
+  },
+yourMiddleAfrica: {
+    text: 'Which country\ndo you live in?',
+    type: 'single',
+    answers: {
+      'a': { row:1, },
+      'b': { row:2, },
+      'c': { row:3, },
+    },
+  }, 
+  yourAmerica: {
+    text: 'Which part of America\ndo you live in?',
+    type: 'single',
+    answers: {
+      'Carribean': { row:1, },
+      'Central America': { row:2, },
+      'Northern America': { row:3, },
+      'South America': { row:4, },
+      "I prefer not to say": { row:5, next:'q' },  
+    },
+  },
+  yourEurasia: {
+    text: 'Which part of Eurasia\ndo you live in?',
+    type: 'single',
+    answers: {
+      'Asia': { row:1, },
+      'Europe': { row:2, },
+      'Middle East': { row:3, },
+      'Russia': { row:4, },
+      'South Caucasus': { row:5, },
+      "I prefer not to say": { row:6, next:'q' },  
+    },
   },
   yourOceania: {
-    text: 'Which country do you live in?',
+    text: 'Which part of Oceania\ndo you live in?',
     type: 'single',
     answers: {
-      '1': { row:1, flag:''},
-      '2': { row:2, flag:''},
-    },  
+      'Australia': { row:1, },
+      'Melanesia': { row:3, },
+      'Micronesia': { row:4, },
+      'New Zealand': { row:2, },
+      'Polynesia': { row:5, },
+      "I prefer not to say": { row:6, next:'q' },  
+    },
   },
 };
 
@@ -301,36 +231,40 @@ function isPicked(q) {
   return status;
 }
 
-function tapAnswer(q, a, nButton) {
+function tapAnswer(q, a, nButton, qFuture) {
   if (q.type === 'single') {
     if (a.picked) {
-      a.btn.classList.remove('single-selected');
+      a.btn.classList.remove('selected');
       a.picked = false;
+      qFuture.shift();
     } else {
       Object.keys(q.answers).forEach(aLabel => {
         const ans = q.answers[aLabel];
         if (ans.picked) {
-          ans.btn.classList.remove('single-selected');
+          ans.btn.classList.remove('selected');
           ans.picked = false;
         }
       });
-      a.btn.classList.add('single-selected');
-      a.picked = true;                               
+      a.btn.classList.add('selected');
+      a.picked = true;
+      qFuture.unshift(a.next);
     }
   } else {
     if (a.picked) {
-      a.btn.classList.remove('multi-selected');
+      a.btn.classList.remove('selected');
       a.picked = false;
+      qFuture.shift();
     } else {
-      a.btn.classList.add('multi-selected');
-      a.picked = true;  
+      a.btn.classList.add('selected');
+      a.picked = true; 
+      qFuture.unshift(a.next);
     } 
   }
   nButton.disabled = !isPicked(q);
   //tg.sendData(JSON.stringify(answers));
 }
 
-function show(profile, qLabel, aSize) {
+function show(profile, qLabel, aSize, qFuture) {
   
   const q = profile[qLabel];
   
@@ -352,12 +286,13 @@ function show(profile, qLabel, aSize) {
     const a = q.answers[aText];
     a.btn = document.createElement('button');
     a.btn.textContent = aText;
-    a.btn.className = 'answer-button';
+    a.btn.className = `answer-button-${q.type}`;
     a.btn.style.visibility = 'hidden';
+    a.btn.disabled = !a.next;
     if (a.picked) {
-      a.btn.classList.add(`${q.type}-selected`);
+      a.btn.classList.add('selected');
     }
-    a.btn.onclick = () => tapAnswer(q, a, nB);
+    a.btn.onclick = () => tapAnswer(q, a, nB, qFuture);
     fitTextToButton(a.btn, aSize);
     if (row == a.row) {} else {
       aContainer.appendChild(rowDiv);
@@ -376,18 +311,9 @@ let hw = document.getElementById("hw");
 hw.innerText = window.innerHeight+'x'+window.innerWidth;
 hw.style.fontSize = '18px'; 
 
-//import { profile, resetProfile } from './profile.js';
 resetProfile(profile);
-  
-const qPast = [];
-let qPresent = 'whereAreYouFrom';
-const qFuture = [
-  //'yourAge',
-  //'theirGender',
-  //'theirAge'
-];
 
-const { qT, bB, nB } = show(profile, qPresent, aSize);
+const { qT, bB, nB } = show(profile, qPresent, aSize, qFuture);
 
 window.addEventListener("load", () => {
   fitTextByLongestLine(qT, qSize);
@@ -409,18 +335,17 @@ bB.onclick = () => {
   if (qPast.length) {
     qFuture.unshift(qPresent);
     qPresent = qPast.pop();
-    showQuestionAndAnswers(profile, qPresent);
+    show(profile, qPresent, aSize, qFuture);
   } else {
     tg.close();    
   }
 };
 
 nB.onclick = () => {
-  //analyseSelection(qPresent);
   if (qFuture.length) {
     qPast.push(qPresent);
     qPresent = qFuture.shift();
-    showQuestionAndAnswers(profile, qPresent);
+    show(profile, qPresent, aSize, qFuture);
   } else {
     //tg.sendData(JSON.stringify(profile));
     tg.close();

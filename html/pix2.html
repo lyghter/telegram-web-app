@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pixel Square 1000×1000</title>
+  <style>
+    body {
+      background-color: black; /* чёрный фон */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    canvas {
+      image-rendering: pixelated;
+      border: 2px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="px"></canvas>
+
+  <script>
+    const logicalSize = 1000; // размер квадрата в логических пикселях
+    const scale = 1;          // масштаб отображения (1 = 1 пиксель = 1 экранный пиксель)
+    const canvas = document.getElementById('px');
+
+    canvas.width = logicalSize;
+    canvas.height = logicalSize;
+    canvas.style.width = (logicalSize * scale) + 'px';
+    canvas.style.height = (logicalSize * scale) + 'px';
+
+    const ctx = canvas.getContext('2d');
+    const img = ctx.createImageData(logicalSize, logicalSize);
+    const data = img.data;
+
+    // Возможные цвета (RGBA)
+    const colors = [
+      [128, 128, 128, 255],  // серый
+      [0, 255, 0, 255],      // зелёный
+      [255, 255, 0, 255],    // жёлтый
+      [0, 128, 255, 255]     // синий
+    ];
+
+    // Заполняем каждый пиксель случайным цветом
+    for (let i = 0; i < data.length; i += 4) {
+      const [r, g, b, a] = colors[Math.floor(Math.random() * colors.length)];
+      data[i] = r;
+      data[i + 1] = g;
+      data[i + 2] = b;
+      data[i + 3] = a;
+    }
+
+    ctx.putImageData(img, 0, 0);
+  </script>
+</body>
+</html>

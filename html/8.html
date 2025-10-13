@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Circle from N pixels</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  canvas {
+    image-rendering: pixelated;
+    display: block;
+    border: 2px solid #333;
+    max-width: 100vw;
+    max-height: 100vh;
+  }
+</style>
+</head>
+<body>
+<canvas id="px"></canvas>
+
+<script>
+const canvas = document.getElementById('px');
+const ctx = canvas.getContext('2d');
+
+const logicalSize = 400; // размер canvas
+canvas.width = logicalSize;
+canvas.height = logicalSize;
+
+const N = 1000; // количество пикселей в круге
+
+// Цвета
+const gray     = [0x26, 0x2C, 0x36, 255];
+const cyan     = [0x00, 0xFF, 0xFF, 255];
+const magenta  = [0xFF, 0x00, 0xFF, 255];
+const mixColor = [0x80, 0x80, 0xFF, 255];
+
+const probs = { gray:0.5, magenta:0.15, cyan:0.3, mix:0.05 };
+
+function getRandomColor(){
+    const p = Math.random();
+    if(p < probs.gray) return gray;
+    if(p < probs.gray + probs.magenta) return magenta;
+    if(p < probs.gray + probs.magenta + probs.cyan) return cyan;
+    return mixColor;
+}
+
+// Генерация круга из N пикселей построчно
+function generateCircleFromN(){
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0,0,logicalSize,logicalSize);
+
+    const cx = logicalSize/2;
+    const cy = logicalSize/2;
+    
+    // Предположим, что круг займёт почти весь canvas
+    const R = logicalSize/2;
+    
+    // Вычисляем примерное количество строк
+    const H = Math.ceil(Math.sqrt(N)); // число строк
+    
+    const rowWidths = [];
+    const yOffsets = [];
+    const cyRow = (H-1)/2;
+
+    // 1. Вычисляем “круглую” ширину каждой строки
+    for(let i=0; i<H; i++){
+        const dy = (i - cyRow)/cyRow; // от -1 до 1
+        const w = Math.sqrt(1 - dy*dy); // √(1-(y/r)^2)
+        rowWidths.push(w);
+        yOffsets.push(i);
+    }
+
+    // 2. Масштабируем ширины строк, чтобы сумма = N
+    const sumW = rowWidths.reduce((a,b)=>a+b,0);
+    const nPixelsRow = rowWidths.map(w => Math.round(w/sumW * N));
+
+    // 3. Рисуем пиксели
+    for(let i=0;i<H;i++){
+        const nPix = nPixelsRow[i];
+        if(nPix===0) continue;
+
+        const y = cy - cyRow + i; // позиция строки
+
+        for(let j=0;j<nPix;j++){
+            // равномерное распределение по центру строки
+            const x = cx - nPix/2 + j + 0.5;
+
+            const [r,g,b,a] = getRandomColor();
+            const img = ctx.createImageData(1,1);
+            const d = img.data;
+            d[0]=r; d[1]=g; d[2]=b; d[3]=a;
+            ctx.putImageData(img, Math.round(x), Math.round(y));
+        }
+    }
+}
+
+function resizeCanvas(){
+    const size = Math.min(window.innerWidth, window.innerHeight);
+    canvas.style.width = size+'px';
+    canvas.style.height = size+'px';
+}
+
+canvas.addEventListener('click', generateCircleFromN);
+
+generateCircleFromN();
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+</script>
+</body>
+</html>

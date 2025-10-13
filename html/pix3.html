@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Adaptive Pixel Square</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background-color: black; /* черный фон */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    canvas {
+      image-rendering: pixelated; /* без размытия при масштабировании */
+      display: block;
+      border: 2px solid #333;
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="px"></canvas>
+
+  <script>
+    const logicalSize = 100; // "внутренний" размер квадрата
+    const canvas = document.getElementById('px');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = logicalSize;
+    canvas.height = logicalSize;
+
+    // Палитра цветов (RGBA)
+    const colors = [
+      [128, 128, 128, 255], // серый
+      [0, 255, 0, 255],     // зеленый
+      [255, 255, 0, 255],   // желтый
+      [0, 128, 255, 255]    // синий
+    ];
+
+    // Функция для генерации случайных пикселей
+    function generatePixels() {
+      const img = ctx.createImageData(logicalSize, logicalSize);
+      const data = img.data;
+
+      for (let i = 0; i < data.length; i += 4) {
+        const [r, g, b, a] = colors[Math.floor(Math.random() * colors.length)];
+        data[i] = r;
+        data[i + 1] = g;
+        data[i + 2] = b;
+        data[i + 3] = a;
+      }
+
+      ctx.putImageData(img, 0, 0);
+    }
+
+    // Масштабирование под размер окна
+    function resizeCanvas() {
+      const size = Math.min(window.innerWidth, window.innerHeight);
+      canvas.style.width = size + 'px';
+      canvas.style.height = size + 'px';
+    }
+
+    // Первичная генерация и масштаб
+    generatePixels();
+    resizeCanvas();
+
+    // Обновляем при изменении размера окна
+    window.addEventListener('resize', resizeCanvas);
+  </script>
+</body>
+</html>
