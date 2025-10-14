@@ -164,20 +164,29 @@ body {
 }
 
 /*v1.1*/
-.answer-button.single-selected { 
+.answer-button-single.selected { 
   background-color: #198754; 
 }
-.answer-button.multi-selected { 
+.answer-button-multi.selected { 
   background-color: #0b5ed7; 
 }
 
-/*v1.2*/
+/*v1.1*/
+.answer-button-single.selected { 
+  background-color: #FF7043; 
+}
+.answer-button-multi.selected { 
+  background-color: #0b5ed7; 
+}
+/*
+v1.2
 .answer-button.single-selected { 
   background-color: #198754; 
 }
 .answer-button.multi-selected { 
   background-color: #008080; 
 }
+*/
 
 
 /*MS*/
