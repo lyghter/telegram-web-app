@@ -1,18 +1,11 @@
-
-
 const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 tg.setHeaderColor('#0D1117');
 tg.setBottomBarColor('#0D1117');
-tg.onEvent('themeChanged', () => tg.setHeaderColor('#0D1117'));
-//tg.onEvent('viewportChanged', () => {
-//  document.getElementById('app-container').style.height = tg.viewportStableHeight + 'px';
-//});
-
-//let v = document.getElementById("v");
-//v.innerText = 'v28';
-//v.style.fontSize = '18px';
+tg.onEvent('themeChanged', () => {
+  tg.setHeaderColor('#0D1117');
+});
 
 const qSize = [0,6];
 const aSize = [0,5];
@@ -127,100 +120,6 @@ function resetProfile(profile) {
   });
 }  
 
-//function fitTextByLongestLine(el, size) {
-//  const style = window.getComputedStyle(el);
-//  let fontSize = parseFloat(style.fontSize);
-//  const minFont = size[0];
-//  const maxFont = size[1] || fontSize;
-//
-//  const tempContainer = document.createElement("div");
-//  tempContainer.style.position = "absolute";
-//  tempContainer.style.visibility = "hidden";
-//  tempContainer.style.width = (el.offsetWidth / window.innerWidth)*100 + "vw";
-//  tempContainer.style.font = style.font;
-//  tempContainer.style.lineHeight = style.lineHeight;
-//  tempContainer.style.whiteSpace = "pre"; // сохраняем заранее заданные переносы
-//  tempContainer.style.wordBreak = "normal";
-//  document.body.appendChild(tempContainer);
-//
-//  const lines = el.textContent.split('\n');
-//
-//  let fits = false;
-//
-//  // Уменьшаем шрифт, если не помещается
-//  while (!fits && fontSize > minFont) {
-//    tempContainer.innerHTML = '';
-//    tempContainer.style.fontSize = fontSize + "vw";
-//
-//    fits = true;
-//    lines.forEach(line => {
-//      const span = document.createElement("span");
-//      span.textContent = line;
-//      tempContainer.appendChild(span);
-//      if (span.offsetWidth > el.offsetWidth) fits = false;
-//    });
-//
-//    if (!fits) fontSize -= 0.5;
-//  }
-//
-//  // Увеличиваем шрифт, если есть место
-//  let canIncrease = true;
-//  while (canIncrease && fontSize < maxFont) {
-//    fontSize += 0.5;
-//    tempContainer.innerHTML = '';
-//    tempContainer.style.fontSize = fontSize + "vw";
-//
-//    canIncrease = true;
-//    lines.forEach(line => {
-//      const span = document.createElement("span");
-//      span.textContent = line;
-//      tempContainer.appendChild(span);
-//      if (span.offsetWidth > el.offsetWidth) canIncrease = false;
-//    });
-//
-//    if (!canIncrease) fontSize -= 0.5; // откат до последнего подходящего размера
-//  }
-//
-//  el.style.fontSize = fontSize + "vw";
-//  document.body.removeChild(tempContainer);
-//}
-
-//function fitTextToButton(button, size) {
-//  const span = document.createElement("span");
-//  span.style.visibility = "hidden";
-//  span.style.whiteSpace = "nowrap";
-//  span.style.position = "absolute";
-//  span.style.font = window.getComputedStyle(button).font;
-//  span.textContent = button.textContent;
-//  document.body.appendChild(span);
-//
-//  const parentWidth = (button.offsetWidth / window.innerWidth) * 100;
-//  const style = window.getComputedStyle(button);
-//  let fontSize = parseFloat(style.fontSize);
-//
-//  const minFont = size[0];
-//  const maxFont = size[1]; // ограничим разумный максимум
-//
-//  // если текст не помещается — уменьшаем шрифт
-//  while ((span.offsetWidth/window.innerWidth)*100 > parentWidth - 4 && fontSize > minFont) {
-//    fontSize -= 0.5;
-//    span.style.fontSize = fontSize + "vw";
-//  }
-//  // если текст влезает и есть место — увеличиваем шрифт
-//  while ((span.offsetWidth/window.innerWidth)*100 < parentWidth - 6 && fontSize < maxFont) {
-//    fontSize += 0.5;
-//    span.style.fontSize = fontSize + "vw";
-//    if ((span.offsetWidth/window.innerWidth)*100 > parentWidth - 4) {
-//      fontSize -= 0.5;
-//      break;
-//    }
-//  }
-//
-//  button.style.fontSize = fontSize + "vw";
-//  span.remove();
-//  button.style.visibility = 'visible';
-//}
-
 function isPicked(q) {
   let status = false;
   Object.values(q.answers).forEach(a => {
@@ -306,59 +205,27 @@ function show(profile, qLabel, aSize, qFuture) {
   return { qT, bB, nB };
 }
 
-function handleOrientation() {
-  const app = document.querySelector('.app-container');
-  const root = document.documentElement;
+const container = document.querySelector('.app-container');
+const hw = document.getElementById('hw');
 
-  // 1. Скрываем контейнер
-  app.style.visibility = 'hidden';
-
-  // 2. Расчёты
-  if (window.innerWidth > window.innerHeight) {
-    // альбомная ориентация
-    app.style.transform = 'rotate(-90deg) scale(1)';
-    root.style.setProperty('--vw', window.innerHeight + 'px');
-    root.style.setProperty('--vh', window.innerWidth + 'px');
-  } else {
-    // портретная ориентация
-    app.style.transform = 'rotate(0deg)';
-    root.style.setProperty('--vw', window.innerWidth + 'px');
-    root.style.setProperty('--vh', window.innerHeight + 'px');
+const observer = new ResizeObserver(entries => {
+  for (let entry of entries) {
+    const { width, height } = entry.contentRect;
+    hw.innerText = `${Math.round(width)}x${Math.round(height)}`;
   }
+});
 
-  // 3. Показываем контейнер после расчётов
-  requestAnimationFrame(() => {
-    app.style.visibility = 'visible';
-  });
-}
+observer.observe(container);
 
-window.addEventListener('resize', handleOrientation);
-window.addEventListener('orientationchange', handleOrientation);
-handleOrientation();
-
-let hw = document.getElementById("hw");
-hw.innerText = window.innerHeight+'x'+window.innerWidth;
-hw.style.fontSize = '5vw'; 
+//let hw = document.getElementById("hw");
+//hw.innerText = window.innerHeight+'x'+window.innerWidth;
+//hw.style.fontSize = '5vw'; 
 
 resetProfile(profile);
 
-const { qT, bB, nB } = show(profile, qPresent, aSize, qFuture);
+const { qT, bB, nB } = show(
+  profile, qPresent, aSize, qFuture);
 
-//window.addEventListener("load", () => {
-//  fitTextByLongestLine(qT, qSize);
-//  const aa = document.querySelectorAll('#answersContainer .answer-button');
-//  aa.forEach(a => fitTextToButton(a, aSize));
-//  fitTextToButton(bB, nSize);
-//  fitTextToButton(nB, nSize);
-//}); 
-
-//window.addEventListener("resize", () => {
-//  fitTextByLongestLine(qT, qSize);
-//  const aa = document.querySelectorAll('#answersContainer .answer-button');
-//  aa.forEach(a => fitTextToButton(a, aSize));
-//  fitTextToButton(bB, nSize);
-//  fitTextToButton(nB, nSize);
-//}); 
 
 bB.onclick = () => {
   if (qPast.length) {

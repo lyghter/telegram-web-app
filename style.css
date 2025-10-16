@@ -1,17 +1,17 @@
-
-
-:root {
-  --vw: 100vw;  /* будет переопределяться JS */
-  --vh: 100vh;
+@font-face {
+  font-family: 'InterLocal';
+  src: url('fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900; 
+  font-style: normal;
+  font-display: swap;
 }
-
 
 html, body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'InterLocal', sans-serif;
   background-color: #262C36;
   color: #fff;
   min-width: 0;
@@ -39,11 +39,12 @@ body {
 }
 
 .app-container {
+  font-family: inherit;
   background-color: #0D1117;
   height: 100%;
   width: 100%;
-  /*max-width: 50vh;*/
-  max-width: calc(100vh * (9 / 15));
+  max-width: 60vh;
+  font-size: 16px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -51,36 +52,41 @@ body {
   padding: 0 2vw 2vw 2vw;
   box-sizing: border-box;
   min-width: 0;
-  visibility: hidden;
+  /*visibility: hidden;*/
   
   /*justify-content: space-between*/
 }
 
 .progress {
+  font-family: inherit;
   width: 100%;
   box-sizing: border-box;
   min-width: 0;
 }
   
 .progress-text {
+  font-family: inherit;
   width: 100%;
   box-sizing: border-box;
   min-width: 0;
 }
 
 .question {
+  font-family: inherit;
   width: 100%;
   box-sizing: border-box;
   min-width: 0;
 }
 
 .question-text {
+  font-family: inherit;
   width: 100%;
+  padding: 1%;
   height: 80px;
   background-color: #0D1117;
   /*border-radius: 12px;*/
-  padding: 2vw;
-  font-size: calc(var(--vw) * 0.07);
+  
+  font-size: 100%;
   /*font-weight: bold;*/
   text-align: center;
   white-space: pre;
@@ -94,6 +100,7 @@ body {
 }
 
 .answers {
+  font-family: inherit;
   padding: 0 0 0 0 ;
   width: 100%;
   display: flex;
@@ -104,12 +111,14 @@ body {
 }
 
 .row {
+  font-family: inherit;
   display: flex;
   gap: 5px;
   min-width: 0;
 }
 
 .row .answer-button {
+  font-family: inherit;
   white-space: nowrap; 
   /*текст не переносится */
   /*overflow: hidden;  обрезает текст, если не помещается */
@@ -127,6 +136,7 @@ body {
 }
 
 .answer-button-single {
+  font-family: inherit;
   white-space: nowrap; 
   flex: 1;
   height: 44px;
@@ -142,6 +152,7 @@ body {
 }
 
 .answer-button-multi {
+  font-family: inherit;
   white-space: nowrap; 
   flex: 1;
   height: 44px;
@@ -241,6 +252,7 @@ v2-disabled
 }
 
 .navigation {
+  font-family: inherit;
   margin-top: auto;
   display: flex;
   width: 100%;
@@ -249,6 +261,7 @@ v2-disabled
 }
 
 .nav-left, .nav-center, .nav-right {
+  font-family: inherit;
   flex: 1;
   flex-direction: column;
   display: flex;
@@ -265,6 +278,7 @@ v2-disabled
 */
 
 .back-button, .next-button {
+  font-family: inherit;
   width: 100%;
   aspect-ratio: 1/1;
   font-size: 20px;
