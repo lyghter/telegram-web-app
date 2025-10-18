@@ -1,4 +1,18 @@
-  yourGender: {
+    whereDoYouLive1: {
+    text: 'Where do you live?',
+    type: 'single',
+    answers: {
+      'Africa': { row:1, next:'yourAfrica'},
+      'America': { row:2, next:'yourAmerica' },
+      'Eurasia': { row:3, next:'yourEurasia'},
+      'Oceania': { row:4, next:'yourOceania' },
+      "I'm global nomad": { row:5, next:'q'},
+      //"I prefer not to say": { row:6, next:'q' },  
+    },
+  }, 
+
+
+yourGender: {
     text: 'Who are you?',
     type: 'single', 
     answers: {

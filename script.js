@@ -7,36 +7,25 @@ tg.onEvent('themeChanged', () => {
   tg.setHeaderColor('#0D1117');
 });
 
-const qSize = [0,6];
-const aSize = [0,5];
-const nSize = [0,6];
+const questionText = document.getElementById('questionText');
+const answersContainer = document.getElementById('answersContainer');
+const backButton = document.getElementById('backButton');
+const nextButton = document.getElementById('nextButton');
 
 const qPast = [];
 let qPresent = 'whereDoYouLive';
 const qFuture = [];
 
 const profile = {
-  whereDoYouLive1: {
-    text: 'Where do you live?',
-    type: 'single',
-    answers: {
-      'Africa': { row:1, next:'yourAfrica'},
-      'America': { row:2, next:'yourAmerica' },
-      'Eurasia': { row:3, next:'yourEurasia'},
-      'Oceania': { row:4, next:'yourOceania' },
-      "I'm global nomad": { row:5, next:'q'},
-      //"I prefer not to say": { row:6, next:'q' },  
-    },
-  }, 
   whereDoYouLive: {
     text: 'Your location',
     type: 'single',
     answers: {
-      "Prefer not to say": { row:1, next:'q' },  
-      'Africa': { row:2, next:'yourAfrica'},
-      'America': { row:2, next:'yourAmerica' },
-      'Eurasia': { row:2, next:'yourEurasia'},
-      'Oceania': { row:2, next:'yourOceania' },
+      //"Prefer not to say": { row:1, next:'q' },  
+      'Africa': { row:1, next:'yourAfrica'},
+      'America': { row:1, next:'yourAmerica' },
+      'Eurasia': { row:1, next:'yourEurasia'},
+      'Oceania': { row:1, next:'yourOceania' },
       //"I'm global nomad": { row:5, next:'q'},
       
     },
@@ -130,7 +119,7 @@ function isPicked(q) {
   return status;
 }
 
-function tapAnswer(q, a, nButton, qFuture) {
+function tapAnswer(q, a, qFuture) {
   if (q.type === 'single') {
     if (a.picked) {
       a.btn.classList.remove('selected');
@@ -159,24 +148,16 @@ function tapAnswer(q, a, nButton, qFuture) {
       qFuture.unshift(a.next);
     } 
   }
-  nButton.disabled = !isPicked(q);
+  nextButton.disabled = !isPicked(q);
   //tg.sendData(JSON.stringify(answers));
 }
 
-function show(profile, qLabel, aSize, qFuture) {
+function show(profile, qLabel, qFuture) {
   
   const q = profile[qLabel];
-  
-  const qT = document.getElementById('questionText');
-  qT.textContent = q.text;
-  
-  const bB = document.getElementById('backButton');
-  
-  const nB = document.getElementById('nextButton');
-  nB.disabled = !isPicked(q);
-  
-  const aContainer = document.getElementById('answersContainer');
-  aContainer.innerHTML = '';
+  questionText.textContent = q.text;
+  nextButton.disabled = !isPicked(q);
+  answersContainer.innerHTML = '';
   
   let row = 1;
   let rowDiv = document.createElement('div');
@@ -186,62 +167,51 @@ function show(profile, qLabel, aSize, qFuture) {
     a.btn = document.createElement('button');
     a.btn.textContent = aText;
     a.btn.className = `answer-button-${q.type}`;
-    //a.btn.style.visibility = 'hidden';
     a.btn.disabled = !a.next;
     if (a.picked) {
       a.btn.classList.add('selected');
     }
-    a.btn.onclick = () => tapAnswer(q, a, nB, qFuture);
-    //fitTextToButton(a.btn, aSize);
+    a.btn.onclick = () => tapAnswer(q, a, qFuture);
     if (row == a.row) {} else {
-      aContainer.appendChild(rowDiv);
+      answersContainer.appendChild(rowDiv);
       rowDiv = document.createElement('div');
       rowDiv.className = 'row';
     }
     rowDiv.appendChild(a.btn);
     row = a.row;
   });
-  aContainer.appendChild(rowDiv);
-  return { qT, bB, nB };
+  answersContainer.appendChild(rowDiv);
 }
 
 const container = document.querySelector('.app-container');
 const hw = document.getElementById('hw');
-
 const observer = new ResizeObserver(entries => {
   for (let entry of entries) {
     const { width, height } = entry.contentRect;
     hw.innerText = `${Math.round(width)}x${Math.round(height)}`;
   }
 });
-
 observer.observe(container);
-
-//let hw = document.getElementById("hw");
-//hw.innerText = window.innerHeight+'x'+window.innerWidth;
-//hw.style.fontSize = '5vw'; 
 
 resetProfile(profile);
 
-const { qT, bB, nB } = show(
-  profile, qPresent, aSize, qFuture);
+show(profile, qPresent, qFuture);
 
-
-bB.onclick = () => {
+backButton.onclick = () => {
   if (qPast.length) {
     qFuture.unshift(qPresent);
     qPresent = qPast.pop();
-    show(profile, qPresent, aSize, qFuture);
+    show(profile, qPresent, qFuture);
   } else {
     tg.close();    
   }
 };
 
-nB.onclick = () => {
+nextButton.onclick = () => {
   if (qFuture.length) {
     qPast.push(qPresent);
     qPresent = qFuture.shift();
-    show(profile, qPresent, aSize, qFuture);
+    show(profile, qPresent, qFuture);
   } else {
     //tg.sendData(JSON.stringify(profile));
     tg.close();
