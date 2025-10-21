@@ -1,6 +1,6 @@
 
 
-const ver = 'v51';
+const ver = 'v52';
 
 const tg = window.Telegram.WebApp;
 
@@ -400,6 +400,52 @@ function getType(q) {
   return x;
 }
 
+function addSVG(button, text, size) {
+  const targetVisualSize = size;  // Целевой визуальный размер шрифта (px) — одинаково везде
+  const viewBoxHeightFactor = 1.5;  // viewBoxHeight = targetVisualSize * factor (для baseline)
+  const charWidth = 8;  // Fallback для ширины, если bbox не сработает
+
+  // 1. Получаем реальную высоту кнопки (в px)
+  const buttonHeight = button.offsetHeight || parseFloat(getComputedStyle(button).height) || 40;  // Fallback 40px
+  const viewBoxHeight = targetVisualSize * viewBoxHeightFactor;  // ~18 для 12px
+
+  // 2. Рассчитываем fontSize в viewBox для фиксированного визуального размера
+  const scale = buttonHeight / viewBoxHeight;
+  const fontSize = targetVisualSize / scale;  // Инверсия: visual = fontSize * scale = targetVisualSize
+
+  // 3. Точная ширина через getBBox (без отступов)
+  const tempSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  tempSvg.style.position = 'absolute';
+  tempSvg.style.visibility = 'hidden';
+  tempSvg.style.width = '0';
+  tempSvg.style.height = '0';
+  document.body.appendChild(tempSvg);
+
+  const tempText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  tempText.setAttribute('font-size', fontSize);
+  tempText.setAttribute('font-family', 'InterLocal');
+  tempText.setAttribute('font-weight', '400');
+  tempText.textContent = text;
+  tempSvg.appendChild(tempText);
+
+  let viewBoxWidth = tempText.getBBox().width;  // Точная ширина текста
+  if (viewBoxWidth === 0) viewBoxWidth = text.length * charWidth;  // Fallback
+
+  document.body.removeChild(tempSvg);
+
+  // 4. Генерируем SVG (твой код + фиксы)
+  const svg = `
+    <svg width="100%" height="100%" viewBox="0 0 ${viewBoxWidth} ${viewBoxHeight}" 
+         preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <text x="${viewBoxWidth / 2}" y="${viewBoxHeight / 2}" 
+            text-anchor="middle" dominant-baseline="central" 
+            fill="white" font-size="${fontSize}" font-family="InterLocal" font-weight="400">
+        ${text}
+      </text>
+    </svg>
+  `;
+  button.innerHTML = svg;
+}
 
 function addButtons(object, mode='') {
   Object.keys(object).forEach(parentText => {
@@ -429,7 +475,8 @@ function addButtons(object, mode='') {
 
 function push(object, r, parent, child, parentText, childText) {
   child.btn = document.createElement('button');
-  child.btn.textContent = childText; 
+  addSVG(child.btn, childText, 16);
+  //child.btn.textContent = childText; 
   child.btn.className = `answer-button-${getType(parent)}`;
   //a.btn.disabled = !a.next;
   if (child.picked) child.btn.classList.add('selected');
@@ -449,6 +496,7 @@ function push(object, r, parent, child, parentText, childText) {
 
 function show() {
   const q = profile[qPresent];
+  //addSVG(questionText, q.text);
   questionText.textContent = q.text;
   nextButton.disabled = !isPicked(q);
   answersContainer.innerHTML = '';

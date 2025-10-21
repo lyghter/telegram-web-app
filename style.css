@@ -6,6 +6,12 @@
   font-display: swap;
 }
 
+/*
+:root {
+    font-size: 1vw;
+}
+*/
+
 body, body * {
   font-family: InterLocal, sans-serif;
   font-optical-sizing: auto;
@@ -90,7 +96,7 @@ button {
   /*border-radius: 12px;*/
   
   /*height: 10cqw;*/
-  font-size: 5cqw;
+  font-size: min(5cqw, 30px);
   /*font-size: min(4cqw, 20px);*/
   /*font-weight: 400;*/
   
