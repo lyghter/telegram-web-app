@@ -1,3 +1,7 @@
+
+
+const ver = 'v49';
+
 const tg = window.Telegram.WebApp;
 
 if (tg.isVersionAtLeast('8.0')) {
@@ -37,8 +41,11 @@ const questionText = document.getElementById('questionText');
 const answersContainer = document.getElementById('answersContainer');
 const backButton = document.getElementById('backButton');
 const nextButton = document.getElementById('nextButton');
+const vButton = document.getElementById('vButton');
+const hwButton = document.getElementById('hwButton');
+vButton.textContent = ver;
 
-const maxRow = 20;
+const maxRow = 10;
 
 const qPast = [];
 let qPresent = 'whereDoYouLive';
@@ -472,21 +479,21 @@ function show() {
   const dA = {};
   const dB = {};
   const dC = {};
-  for (let r1 = 1; r1 < maxRow; r1++) {
+  for (let r1 = 1; r1 <= maxRow; r1++) {
     Object.keys(q.answers).forEach(aText => {
       const a = q.answers[aText];
       if (a.row == r1) {
         const text = qPresent;
         push(dA,r1,q,a,text,aText);
         if ('answers' in a) {
-          for (let r2 = 1; r2 < maxRow; r2++) {
+          for (let r2 = 1; r2 <= maxRow; r2++) {
             Object.keys(a.answers).forEach(bText => {
               const b = a.answers[bText];
               if (b.row == r2) {
                 const text = `${qPresent}:${aText}`;
                 push(dB,r2,a,b,text,bText);
                 if ('answers' in b) {
-                  for (let r3 = 1; r3 < maxRow; r3++) {
+                  for (let r3 = 1; r3 <= maxRow; r3++) {
                     Object.keys(b.answers).forEach(cText => {
                       const c = b.answers[cText];
                       if (c.row == r3) {
@@ -516,7 +523,7 @@ const hw = document.getElementById('hw');
 const observer = new ResizeObserver(entries => {
   for (let entry of entries) {
     const { width, height } = entry.contentRect;
-    hw.innerText = `${Math.round(width)}x${Math.round(height)}`;
+    hwButton.textContent = `${Math.round(width)}x${Math.round(height)}`;
   }
 });
 observer.observe(container);

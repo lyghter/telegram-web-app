@@ -84,13 +84,15 @@ button {
 .question-text {
   padding: 0 2cqw 0 2cqw;
   width: 100%;
+  aspect-ratio: 7/1;
   /*padding: 1%;*/
   /*height: 80px;*/
   background-color: #0D1117;
   /*border-radius: 12px;*/
   
-  height: 25cqw;
-  font-size: min(5cqw, 23px);;
+  /*height: 10cqw;*/
+  font-size: min(5cqw, 23px);*/
+  /*font-size: min(4cqw, 20px);*/
   /*font-weight: 400;*/
   
   text-align: center;
@@ -280,9 +282,21 @@ v2-disabled
 .nav-center-text {}  
 */
 
+.v-button, .hw-button {
+  width: 100%;
+  aspect-ratio: 4/1;
+  font-size: min(4cqw, 20px);
+  border-radius: 0;
+  border: none;
+  background-color: #0D1117;
+  color: #fff;
+  cursor: default;
+  user-select: none;
+}
+
 .back-button, .next-button {
   width: 100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 2/1;
   font-size: min(4cqw, 20px);
   border-radius: 4cqw;
   border: none;
