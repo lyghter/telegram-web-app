@@ -49,14 +49,15 @@ button {
   background-color: #0D1117;
   height: 100%;
   width: 100%;
-  /*max-width: 60vh;*/
+  max-width: 60vh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 2vw 2vw 2vw;
+  padding: 0 0 0 0;
   box-sizing: border-box;
   min-width: 0;
+  container-type: inline-size;
   /*visibility: hidden;*/
   
   /*justify-content: space-between*/
@@ -81,14 +82,15 @@ button {
 }
 
 .question-text {
+  padding: 0 2cqw 0 2cqw;
   width: 100%;
   /*padding: 1%;*/
   /*height: 80px;*/
   background-color: #0D1117;
   /*border-radius: 12px;*/
   
-  height: 25vw;
-  font-size: min(5vw, 23px);;
+  height: 25cqw;
+  font-size: min(5cqw, 23px);;
   /*font-weight: 400;*/
   
   text-align: center;
@@ -103,12 +105,12 @@ button {
 }
 
 .answers {
-  padding: 0 0 0 0 ;
+  padding: 0 2cqw 0 2cqw;
   width: 100%;
   display: flex;
   flex-direction: column;
   /*gap: 5px;*/
-  gap: 1.5vw;
+  gap: 1.5cqw;
   box-sizing: border-box;
   min-width: 0;
 }
@@ -118,7 +120,7 @@ button {
   font-family: inherit;
   display: flex;
   /*gap: 5px;*/
-  gap: 1.5vw;
+  gap: 1.5cqw;
   min-width: 0;
 }
 
@@ -131,9 +133,9 @@ button {
 
 .answer-button-single {
   
-  height: 10vw;
-  font-size: min(4vw, 20px);
-  border-radius: 3vw;
+  height: 10cqw;
+  font-size: min(4cqw, 20px);
+  border-radius: 3cqw;
   
   white-space: nowrap; 
   flex-grow: 1;        
@@ -153,9 +155,9 @@ button {
 }
 
 .answer-button-multi {
-  height: 10vw;
-  font-size: min(4vw, 20px);
-  border-radius: 3vw;
+  height: 10cqw;
+  font-size: min(4cqw, 20px);
+  border-radius: 3cqw;
   
   white-space: nowrap; 
   flex: 1;
@@ -255,6 +257,7 @@ v2-disabled
 }
 
 .navigation {
+  padding: 0 2cqw 2cqw 2cqw;
   margin-top: auto;
   display: flex;
   width: 100%;
@@ -280,8 +283,8 @@ v2-disabled
 .back-button, .next-button {
   width: 100%;
   aspect-ratio: 1/1;
-  font-size: 20px;
-  border-radius: 4vw;
+  font-size: min(4cqw, 20px);
+  border-radius: 4cqw;
   border: none;
   background-color: #262C36;
   color: #fff;
