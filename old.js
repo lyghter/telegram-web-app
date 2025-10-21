@@ -1,4 +1,34 @@
-         //"I'm global nomad": { row:5, next:'q'},
+
+if (tg.isVersionAtLeast('8.0')) {
+  tg.requestFullscreen();
+  if (!tg.isFullscreen) {
+    console.log('Fallback');
+    tg.expand();
+  }
+  tg.onEvent('safeAreaChanged', function() {
+      const insets = tg.safeAreaInset;
+      //document.body.style.paddingTop = insets.top + 'px';
+      //document.body.style.paddingBottom = insets.bottom + 'px';
+      //document.body.style.paddingLeft = insets.left + 'px';
+      //document.body.style.paddingRight = insets.right + 'px';
+  });
+  tg.onEvent('fullscreenChanged', function() {
+        console.log('Fullscreen включен:', tg.isFullscreen);
+        if (!tg.isFullscreen) tg.expand();  
+    });
+  tg.onEvent('fullscreenFailed', function(event) {
+      console.log('Ошибка fullscreen:', event.error);
+      tg.expand(); 
+  });
+  tg.lockOrientation();
+} else {
+  tg.expand();
+}
+
+
+
+
+//"I'm global nomad": { row:5, next:'q'},
             //"Prefer not to say": { row:1, next:'q' }, 
         let x;
         if (!('type' in q)) {
