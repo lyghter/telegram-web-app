@@ -12,6 +12,8 @@ const answersContainer = document.getElementById('answersContainer');
 const backButton = document.getElementById('backButton');
 const nextButton = document.getElementById('nextButton');
 
+const maxRow = 20;
+
 const qPast = [];
 let qPresent = 'whereDoYouLive';
 const qFuture = [];
@@ -93,35 +95,68 @@ const profile = {
       }},
       'America': { row:1, answers: {
         'Carribean': { row:1, answers: {
-          'AG': { row:1, name:'Antigua and Barbuda' },
-          'AI': { row:1, name:'Anguilla (UK)' },
-          'AW': { row:1, name:'Aruba (Netherlands)' },
-          'BS': { row:1, name:'Bahamas' },
-          'BB': { row:1, name:'Barbados' },
-          'BM': { row:1, name:'Bermuda (UK)' },
-          'BQ': { row:1, name:'Bonaire, Sint Eustatius and Saba (Netherlands)' },
-          'VG': { row:1, name:'British Virgin Islands (UK)' },
-          'KY': { row:1, name:'Cayman Islands (UK)' },
-          'CU': { row:1, name:'Cuba' },
-          'CW': { row:1, name:'Curaçao (Netherlands)' },
-          'DM': { row:1, name:'Dominica' },
-          'DO': { row:1, name:'Dominican Republic' },
-          'GD': { row:1, name:'Grenada' },
-          'GP': { row:1, name:'Guadeloupe (France)' },
-          'HT': { row:1, name:'Haiti' },
-          'JM': { row:1, name:'Jamaica' },
-          'MQ': { row:1, name:'Martinique (France)' },
-          'MS': { row:1, name:'Montserrat (UK)' },
-          'PR': { row:1, name:'Puerto Rico (US)' },
-          'BL': { row:1, name:'Saint Barthélemy (France)' },
-          'KN': { row:1, name:'Saint Kitts and Nevis' },
-          'LC': { row:1, name:'Saint Lucia' },
-          'MF': { row:1, name:'Saint Martin (French part)' },   
-          'VC': { row:1, name:'Saint Vincent and the Grenadines' },
-          'SX': { row:1, name:'Sint Maarten (Dutch part)' },  
-          'TT': { row:1, name:'Trinidad and Tobago' },
-          'TC': { row:1, name:'Turks and Caicos Islands (UK)' },  
-          'VI': { row:1, name:'United States Virgin Islands (US)' }, 
+          'Antigua & Barbuda': { row:1, name:'AG' },
+          'Anguilla': { row:1, name:'AI (UK)' },
+          'Aruba': { row:1, name:'AW (NL)' },
+          'Bahamas': { row:1, name:'BS' },
+            'Barbados': { row:2, name:'BB' },
+            'Bermuda': { row:2, name:'BM (UK)' },
+            'Caribbean Netherlands': { row:2, name:'BQ (NL)' },
+          'Cayman Is.': { row:3, name:'KY (UK)' },
+          'Cuba': { row:3, name:'CU' },
+          'Curaçao': { row:3, name:'CW (NE)' },
+          'Dominica': { row:3, name:'DM' },
+            'Dominican Rep.': { row:4, name:'DO' },
+            'Grenada': { row:4, name:'GD' },
+            'Guadeloupe': { row:4, name:'GP (FR)' },          
+            'Haiti': { row:4, name:'HT' },
+          'Jamaica': { row:5, name:'JM' },
+          'Martinique': { row:5, name:'MQ (FR)' },
+          'Montserrat': { row:5, name:'MS (UK)' },
+          'Puerto Rico': { row:5, name:'PR (US)' },
+          'St. Barthélemy': { row:6, name:'BL (FR)' },
+          'St. Kitts & Nevis': { row:6, name:'KN' },
+          'St. Lucia': { row:6, name:'LC' },
+            'St. Maarten (Dutch part)': { row:8, name:'SX (NL part)' },  
+            'St. Martin (French part)': { row:8, name:'MF (FR part)' }, 
+          'St. Vincent & the Grenadines': { row:9, name:'VC' },
+          'Trinidad & Tobago': { row:9, name:'TT' },
+            'Turks & Caicos Is.': { row:10, name:'TC (UK)' },
+            'Virgin Is. (UK)': { row:10, name:'VG (UK)' },
+            'Virgin Is. (US)': { row:10, name:'VI (US)' },  
+          
+          
+          
+          //'AG': { row:1, name:'Antigua and Barbuda' },
+          //'AI': { row:1, name:'Anguilla (UK)' },
+          //'AW': { row:1, name:'Aruba (Netherlands)' },
+          //'BS': { row:1, name:'Bahamas' },
+          //'BB': { row:1, name:'Barbados' },
+          //'BM': { row:1, name:'Bermuda (UK)' },
+          //'BQ': { row:1, name:'Bonaire, Sint Eustatius and Saba (Netherlands)' },
+          //'VG': { row:1, name:'British Virgin Islands (UK)' },
+          //'KY': { row:1, name:'Cayman Islands (UK)' },
+          //'CU': { row:1, name:'Cuba' },
+          //'CW': { row:1, name:'Curaçao (Netherlands)' },
+          //'DM': { row:1, name:'Dominica' },
+          //'DO': { row:1, name:'Dominican Republic' },
+          //'GD': { row:1, name:'Grenada' },
+          //'GP': { row:1, name:'Guadeloupe (France)' },
+          //'HT': { row:1, name:'Haiti' },
+          //'JM': { row:1, name:'Jamaica' },
+          //'MQ': { row:1, name:'Martinique (France)' },
+          //'MS': { row:1, name:'Montserrat (UK)' },
+          //'PR': { row:1, name:'Puerto Rico (US)' },
+          //'BL': { row:1, name:'Saint Barthélemy (France)' },
+          //'KN': { row:1, name:'Saint Kitts and Nevis' },
+          //'LC': { row:1, name:'Saint Lucia' },
+          //'MF': { row:1, name:'Saint Martin (French part)' },   
+          //'VC': { row:1, name:'Saint Vincent and the Grenadines' },
+          //'SX': { row:1, name:'Sint Maarten (Dutch part)' },  
+          //'TT': { row:1, name:'Trinidad and Tobago' },
+          //'TC': { row:1, name:'Turks and Caicos Islands (UK)' },  
+          //'VI': { row:1, name:'United States Virgin Islands (US)' },
+          
         } },
         'Central': { row:1, answers: {
           'BZ': { row:1, name:'Belize' },
@@ -411,21 +446,21 @@ function show() {
   const dA = {};
   const dB = {};
   const dC = {};
-  for (let r1 = 1; r1 < 10; r1++) {
+  for (let r1 = 1; r1 < maxRow; r1++) {
     Object.keys(q.answers).forEach(aText => {
       const a = q.answers[aText];
       if (a.row == r1) {
         const text = qPresent;
         push(dA,r1,q,a,text,aText);
         if ('answers' in a) {
-          for (let r2 = 1; r2 < 10; r2++) {
+          for (let r2 = 1; r2 < maxRow; r2++) {
             Object.keys(a.answers).forEach(bText => {
               const b = a.answers[bText];
               if (b.row == r2) {
                 const text = `${qPresent}:${aText}`;
                 push(dB,r2,a,b,text,bText);
                 if ('answers' in b) {
-                  for (let r3 = 1; r3 < 10; r3++) {
+                  for (let r3 = 1; r3 < maxRow; r3++) {
                     Object.keys(b.answers).forEach(cText => {
                       const c = b.answers[cText];
                       if (c.row == r3) {
