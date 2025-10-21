@@ -8,10 +8,10 @@ if (tg.isVersionAtLeast('8.0')) {
   }
   tg.onEvent('safeAreaChanged', function() {
       const insets = tg.safeAreaInset;
-      document.body.style.paddingTop = insets.top + 'px';
-      document.body.style.paddingBottom = insets.bottom + 'px';
-      document.body.style.paddingLeft = insets.left + 'px';
-      document.body.style.paddingRight = insets.right + 'px';
+      //document.body.style.paddingTop = insets.top + 'px';
+      //document.body.style.paddingBottom = insets.bottom + 'px';
+      //document.body.style.paddingLeft = insets.left + 'px';
+      //document.body.style.paddingRight = insets.right + 'px';
   });
   tg.onEvent('fullscreenChanged', function() {
         console.log('Fullscreen включен:', tg.isFullscreen);
