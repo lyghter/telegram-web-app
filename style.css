@@ -88,7 +88,7 @@ button {
   /*border-radius: 12px;*/
   
   height: 25vw;
-  font-size: 5vw;
+  font-size: min(5vw, 23px);;
   /*font-weight: 400;*/
   
   text-align: center;
@@ -122,13 +122,25 @@ button {
   min-width: 0;
 }
 
+.hidden {
+  display: none !important;  /* скрывает элемент */
+  margin: 0 !important;      /* обнуляет внешние отступы */
+  padding: 0 !important;     /* обнуляет внутренние отступы */
+  gap: 0 !important;         /* если это flex-контейнер, убирает промежутки между элементами */
+}
+
 .answer-button-single {
+  
   height: 10vw;
-  font-size: 4vw;
+  font-size: min(4vw, 20px);
   border-radius: 3vw;
   
   white-space: nowrap; 
-  flex: 1;
+  flex-grow: 1;        
+  flex-shrink: 1;       
+  flex-basis: auto; 
+  
+  /*flex: 1;*/
   /*border-radius: 50vmax;*/
   /*border-radius: 12px;*/
   border: none;
@@ -142,7 +154,7 @@ button {
 
 .answer-button-multi {
   height: 10vw;
-  font-size: 4vw;
+  font-size: min(4vw, 20px);
   border-radius: 3vw;
   
   white-space: nowrap; 
@@ -281,6 +293,8 @@ v2-disabled
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+
 
 
 

@@ -1,4 +1,63 @@
-    whereDoYouLive1: {
+         //"I'm global nomad": { row:5, next:'q'},
+            //"Prefer not to say": { row:1, next:'q' }, 
+        let x;
+        if (!('type' in q)) {
+          x = 'single';
+        } else {
+          if (q.type === 'single') {
+            x = 'single';
+          } else {
+            x = 'multi';
+          }
+        } 
+        a.btn.className = `answer-button-${x}`;
+
+
+text: 'Which country\ndo you live in?',
+  yourAfrica: {
+    text: 'Which part of Africa\ndo you live in?',
+    type: 'multi',
+    answers: {
+      'Eastern Africa': { row:1, next:'yourEasternAfrica'},
+      'Middle Africa': { row:2, next:'yourMiddleAfrica'},
+
+      "I prefer not to say": { row:6, next:'q' },  
+    },
+  },
+yourMiddleAfrica: {
+    text: 'Which country\ndo you live in?',
+    type: 'single',
+    answers: {
+      'a': { row:1, },
+      'b': { row:2, },
+      'c': { row:3, },
+    },
+  }, 
+  yourAmerica: {
+    text: 'Which part of America\ndo you live in?',
+    type: 'single',
+    answers: {
+ 
+    },
+  },
+  yourEurasia: {
+    text: 'Which part of Eurasia\ndo you live in?',
+    type: 'single',
+    answers: {
+ 
+    },
+  },
+  yourOceania: {
+    text: 'Which part of Oceania\ndo you live in?',
+    type: 'single',
+    answers: {
+      "I prefer not to say": { row:6, next:'q' },  
+    },
+  },
+
+
+
+whereDoYouLive1: {
     text: 'Where do you live?',
     type: 'single',
     answers: {
