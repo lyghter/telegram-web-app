@@ -57,9 +57,8 @@ button {
   padding: 0 0 0 0;
   box-sizing: border-box;
   min-width: 0;
-  container-type: inline-size;
+  container-type: size;
   /*visibility: hidden;*/
-  
   /*justify-content: space-between*/
 }
 
@@ -91,7 +90,7 @@ button {
   /*border-radius: 12px;*/
   
   /*height: 10cqw;*/
-  font-size: min(5cqw, 23px);*/
+  font-size: 5cqw;
   /*font-size: min(4cqw, 20px);*/
   /*font-weight: 400;*/
   
@@ -134,33 +133,35 @@ button {
 }
 
 .answer-button-single {
-  
   height: 10cqw;
-  font-size: min(4cqw, 20px);
+  /*font-size: 4cqw;*/
+  font-size: min(2.5cqh,4cqw);
   border-radius: 3cqw;
-  
   white-space: nowrap; 
   flex-grow: 1;        
   flex-shrink: 1;       
   flex-basis: auto; 
-  
   /*flex: 1;*/
   /*border-radius: 50vmax;*/
   /*border-radius: 12px;*/
   border: none;
   background-color: #262C36;
   color: #fff;
-  
   cursor: pointer;
   word-break: break-word;
   min-width: 0;
 }
 
+/*
+.answer-button-single span {
+  
+}
+*/
+
 .answer-button-multi {
   height: 10cqw;
-  font-size: min(4cqw, 20px);
+  font-size: 4cqw;
   border-radius: 3cqw;
-  
   white-space: nowrap; 
   flex: 1;
   border: none;
@@ -169,6 +170,7 @@ button {
   cursor: pointer;
   word-break: break-word;
   min-width: 0;
+  container-type: block-size;
 }
 
 /*v1*/

@@ -1,6 +1,6 @@
 
 
-const ver = 'v50';
+const ver = 'v51';
 
 const tg = window.Telegram.WebApp;
 
