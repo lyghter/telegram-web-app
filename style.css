@@ -117,7 +117,7 @@ button {
   display: flex;
   flex-direction: column;
   /*gap: 5px;*/
-  gap: 1.5cqw;
+  gap: 1.3cqw;
   box-sizing: border-box;
   min-width: 0;
 }
@@ -127,7 +127,7 @@ button {
   font-family: inherit;
   display: flex;
   /*gap: 5px;*/
-  gap: 1.5cqw;
+  gap: 1.3cqw;
   min-width: 0;
 }
 
@@ -141,7 +141,7 @@ button {
 .answer-button-single {
   height: 10cqw;
   /*font-size: 4cqw;*/
-  font-size: min(2.5cqh,4cqw);
+  font-size: 4.0cqw;
   border-radius: 3cqw;
   white-space: nowrap; 
   flex-grow: 1;        
