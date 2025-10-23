@@ -1,6 +1,6 @@
 
 
-const ver = 'v52';
+const ver = 'v53';
 
 const tg = window.Telegram.WebApp;
 
@@ -33,108 +33,128 @@ const profile = {
     type: 'single',
     answers: { 
       'Africa': { row:1, answers: {
-        'East': { row:1, type:'single', answers: {
-          'Burundi': { row:1, name:'BI' },
-          'Comoros': { row:1, name:'KM' },
-          'Djibouti': { row:1, name:'DJ' },
-          'Eritrea': { row:1, name:'ER' },
-            'Ethiopia': { row:2, name:'ET' },
-            'Kenya': { row:2, name:'KE' },
-            'Madagascar': { row:2, name:'MG' },
-            'Malawi': { row:2, name:'MW' },          
-          'Mauritius': { row:3, name:'MU' }, 
-          'Mayotte': { row:3, name:'YT (FR)' },
-          'Mozambique': { row:3, name:'MZ' }, 
-          'Réunion': { row:3, name:'RE (FR)' },
-            'Rwanda': { row:4, name:'RW' },
-            'Seychelles': { row:4, name:'SC' },
-            'Somalia': { row:4, name:'SO' },
-            'South Sudan': { row:4, name:'SS' }, 
-          'Tanzania': { row:5, name:'TZ' },
-          'Uganda': { row:5, name:'UG' },  
-          'Zambia': { row:5, name:'ZM' },
-          'Zimbabwe': { row:5, name:'ZW' },
+        'Central': { row:1, type:'single', answers: {
+          'DR Congo': { row:1, name:'CD 109' },
+          'Angola': { row:1, name:'AO 38' },
+          'Cameroon': { row:1, name:'CM 29' },
+            'Chad': { row:2, name:'TD 20' },
+            'Congo': { row:2, name:'CG 6' },
+            'CAR': { row:2, name:'CF 5.3' },
+            'Gabon': { row:2, name:'GA 2.4' },
+          'Equatorial Guinea': { row:3, name:'GQ 1.9' },
+          'São Tomé and Príncipe': { row:3, name:'ST 0.2' },
         } },
-        'Middle': { row:1, type:'single', answers: {
-          'Angola': { row:1, name:'AO' },
-          'Cameroon': { row:1, name:'CM' },
-          'Central African Republic': { row:1, name:'CF' },
-            'Chad': { row:2, name:'TD' },
-            'Congo (Dem. Rep.)': { row:2, name:'Democratic Republic of the Congo CD' },
-            'Congo (Rep.)': { row:2, name:'Republic of the Congo CG' },
-          'Equ. Guinea': { row:3, name:'GQ' },
-          'Gabon': { row:3, name:'GA' },
-          'São Tomé and Príncipe': { row:3, name:'ST' },
-            
+        'East': { row:1, type:'single', answers: {
+            'Ethiopia': { row:2, name:'ET 132' },
+          'Tanzania': { row:2, name:'TZ 68.6' },
+          'Kenya': { row:2, name:'KE 56.4' },
+          'Uganda': { row:2, name:'UG 50' }, 
+            'Mozambique': { row:3, name:'MZ 34.6' }, 
+            'Madagascar': { row:3, name:'MG 31.9' },
+            'Malawi': { row:3, name:'MW 21.7' }, 
+            'Zambia': { row:3, name:'ZM 21.3' },
+          'Somalia': { row:4, name:'SO 19' },
+          'Zimbabwe': { row:4, name:'ZW 16.6' },
+          'Rwanda': { row:4, name:'RW 14.3' },
+          'Burundi': { row:4, name:'BI 14.1' },
+            'S. Sudan': { row:5, name:'SS 11.9' },
+            'Eritrea': { row:5, name:'ER 3.5' },
+            'Mauritius': { row:5, name:'MU 1.3' }, 
+            'Djibouti': { row:5, name:'DJ 1.2' },
+          'Comoros': { row:6, name:'KM 0.9' },
+          'Réunion': { row:6, name:'RE (FR) 0.9' },
+          'Mayotte': { row:6, name:'YT (FR) 0.3' },
+          'Seychelles': { row:6, name:'SC 0.1' },
         } },
         'North': { row:1, type:'single', answers: {
-          'Algeria': { row:1, name:'DZ' },
-          'Egypt': { row:1, name:'EG' },
-          'Libya': { row:1, name:'LY' },
-          'Mauritania': { row:1, name:'MR' },
-            'Morocco': { row:2, name:'MA' },
-            'SADR': { row:2, name:'EH (disputed territory)' },
-            'Sudan': { row:2, name:'SD' },
-            'Tunisia': { row:2, name:'TN' },
+            'Egypt': { row:1, name:'EG 116.5' },
+            'Sudan': { row:1, name:'SD 50.5' },
+            'Algeria': { row:1, name:'DZ 46.8' },
+            'Morocco': { row:1, name:'MA 38.1' },
+              'Tunisia': { row:2, name:'TN 12.3' },
+              'Libya': { row:2, name:'LY 7.4' },
+              'Mauritania': { row:2, name:'MR 5.2' },
+              'SADR': { row:2, name:'EH (disputed territory) 0.5' }, 
         } },
         'South': { row:1, type:'single', answers: {
-          'Botswana ': { row:1, name:'BW' },
-          'Eswatini': { row:1, name:'SZ (Swaziland)' },
-          'Lesotho': { row:1, name:'LS' },
-          'Namibia': { row:1, name:'NA' },
-          'RSA': { row:1, name:'ZA' },
+          'Republic of South Africa': { row:1, name:'ZA 63' },
+            'Namibia': { row:2, name:'NA 3.0' },
+            'Botswana ': { row:2, name:'BW 2.5' },
+            'Lesotho': { row:2, name:'LS 2.3' },
+            'Eswatini': { row:2, name:'SZ (Swaziland) 1.2' },
         } },
         'West': { row:1, type:'single', answers: {
-          'Benin': { row:1, name:'BJ' },
-          'Burkina Faso': { row:1, name:'BF' },
-          'Cabo Verde': { row:1, name:'CV' },
-            'Côte d’Ivoire': { row:2, name:'CI' },
-            'Gambia': { row:2, name:'GM' },
-            'Ghana': { row:2, name:'GH' },
-            'Guinea': { row:2, name:'GN' },
-          'Guinea-Bissau': { row:3, name:'GW' },
-          'Liberia': { row:3, name:'LR' },
-          'Mali': { row:3, name:'ML' },
-
-          'Niger': { row:3, name:'NE' },
-          'Nigeria': { row:3, name:'NG' },
-            'Saint Helena': { row:4, name:'SH (UK)' },
-            'Senegal': { row:4, name:'SN' },
-            'Sierra Leone': { row:4, name:'SL' },
-            'Togo': { row:4, name:'TG' },
+          'Nigeria': { row:1, name:'NG 232.7' },
+            'Ghana': { row:2, name:'GH 34.4' },
+            'Côte d’Ivoire': { row:2, name:'CI 31.9' },
+            'Burkina Faso': { row:2, name:'BF 23.6' },
+          'Niger': { row:3, name:'NE 27.0' },
+          'Mali': { row:3, name:'ML 24.5' },
+          'Senegal': { row:3, name:'SN 18.5' },
+          'Benin': { row:3, name:'BJ 14.5' },
+          'Guinea': { row:3, name:'GN 14.8' },
+            'Togo': { row:4, name:'TG 9.5' },
+            'Sierra Leone': { row:4, name:'SL 8.6' },
+            'Liberia': { row:4, name:'LR 5.4' },
+            'Gambia': { row:4, name:'GM 2.8' },
+          'Guinea-Bissau': { row:5, name:'GW 2.0' },
+          'Cabo Verde': { row:5, name:'CV 0.5' },
+          'Saint Helena': { row:5, name:'SH (UK) 0.04' },
         } },
       }},
       'America': { row:1, answers: {
         'Carribean': { row:1, type:'single', answers: {
-          'Antigua & Barbuda': { row:1, name:'AG' },
-          'Anguilla': { row:1, name:'AI (UK)' },
-          'Aruba': { row:1, name:'AW (NL)' },
-          'Bahamas': { row:1, name:'BS' },
-            'Barbados': { row:2, name:'BB' },
-            'Bermuda': { row:2, name:'BM (UK)' },
-            'Caribbean Netherlands': { row:2, name:'BQ (NL)' },
-          'Cayman Is.': { row:3, name:'KY (UK)' },
-          'Cuba': { row:3, name:'CU' },
-          'Curaçao': { row:3, name:'CW (NE)' },
-          'Dominica': { row:3, name:'DM' },
-            'Dominican Rep.': { row:4, name:'DO' },
-            'Grenada': { row:4, name:'GD' },
-            'Guadeloupe': { row:4, name:'GP (FR)' },          
-            'Haiti': { row:4, name:'HT' },
-          'Jamaica': { row:5, name:'JM' },
-          'Martinique': { row:5, name:'MQ (FR)' },
-          'Montserrat': { row:5, name:'MS (UK)' },
-          'Puerto Rico': { row:5, name:'PR (US)' },
-          'St. Barthélemy': { row:6, name:'BL (FR)' },
-          'St. Kitts & Nevis': { row:6, name:'KN' },
-          'St. Lucia': { row:6, name:'LC' },
-            'St. Maarten (Dutch part)': { row:8, name:'SX (NL part)' },  
-            'St. Martin (French part)': { row:8, name:'MF (FR part)' }, 
-          'St. Vincent & the Grenadines': { row:9, name:'VC' },
-          'Trinidad & Tobago': { row:9, name:'TT' },
-            'Turks & Caicos Is.': { row:10, name:'TC (UK)' },
-            'Virgin Is. (UK)': { row:10, name:'VG (UK)' },
-            'Virgin Is. (US)': { row:10, name:'VI (US)' },  
+          'Haiti': { row:1, name:'HT 11.0' },
+          'Cuba': { row:1, name:'CU 11.0' },
+          'Dominican Rep.': { row:1, name:'DO 10.9' },
+            'Puerto Rico': { row:2, name:'PR (US) 3.3' },
+            'Jamaica': { row:2, name:'JM 2.8' },
+            'Trinidad & Tobago': { row:2, name:'TT 1.5' },
+          'Bahamas': { row:3, name:'BS 0.42' },
+          'Guadeloupe': { row:3, name:'GP (FR) 0.38' },
+          'Martinique': { row:3, name:'MQ (FR) 0.37' },
+          'Barbados': { row:3, name:'BB 0.28' },
+            'St. Lucia': { row:4, name:'LC 0.18' },
+            'Curaçao': { row:4, name:'CW (NE) 0.16' },
+            'Grenada': { row:4, name:'GD 0.13' },
+            'Aruba': { row:4, name:'AW (NL) 0.11' },
+            'Cayman': { row:4, name:'KY (UK) 0.08' },
+          'St. Vincent & the Grenadines': { row:5, name:'VC 0.11' },
+          'Antigua & Barbuda': { row:5, name:'AG 0.10' },
+            'Dominica': { row:6, name:'DM 0.07' },
+            'Turks & Caicos': { row:6, name:'TC (UK) 0.06' },
+            'Virgin (US)': { row:6, name:'VI (US) 0.10' }, 
+            'Virgin (UK)': { row:7, name:'VG (UK) 0.03' },
+          'St. Martin (FR)': { row:7, name:'MF (FR part) 0.04' },
+          'St. Maarten (NL)': { row:7, name:'SX (NL part) 0.04' },
+            'St. Kitts & Nevis': { row:8, name:'KN 0.06' },
+            'Caribbean Netherlands': { row:8, name:'BQ (NL) 0.03' },
+          'Anguilla': { row:9, name:'AI (UK) 0.02' },
+          'St. Barthélemy': { row:9, name:'BL (FR) 0.01' },
+          'Montserrat': { row:9, name:'MS (UK) 0.005' },
+          
+          
+          
+          
+          
+            
+            
+                      
+            
+          
+          
+          
+          
+          
+          
+          
+              
+            
+          
+          
+            
+            
+             
           
           
           
@@ -169,163 +189,216 @@ const profile = {
           //'VI': { row:1, name:'United States Virgin Islands (US)' },
           
         } },
-        'Central': { row:1, type:'single', answers: {
-          'Belize': { row:1, name:'BZ' },
-          'Costa Rica': { row:1, name:'CR' },
-          'El Salvador': { row:1, name:'SV' },
-          'Guatemala': { row:1, name:'GT' },
-          'Honduras': { row:2, name:'HN' },
-          'Mexico': { row:2, name:'MX' },
-          'Nicaragua': { row:2, name:'NI' },
-          'Panama': { row:2, name:'PA' },
-          
-        } },
         'North': { row:1, type:'single', answers: {
-          'Bermuda': { row:1, name:'BM (UK)' },
-          'Canada': { row:1, name:'CA' },
-          'Greenland': { row:1, name:'GL (Denmark)' },
-          'St. Pierre & Miquelon': { row:2, name:'PM (France)' },
-          'United States': { row:2, name:'US' },        
+          'United States': { row:1, name:'US 340' },
+            'Mexico': { row:2, name:'MX 130.9' },
+            'Canada': { row:2, name:'CA 41.3' },
+        'Guatemala': { row:3, name:'GT 18.4' },
+        'Honduras': { row:3, name:'HN 10.8' },
+        'Nicaragua': { row:3, name:'NI 6.9' },
+          'El Salvador': { row:4, name:'SV 6.3' },
+          'Costa Rica': { row:4, name:'CR 5.0' },
+          'Panama': { row:4, name:'PA 4.5' },
+          'Belize': { row:4, name:'BZ 0.4' },
+        'Bermuda': { row:5, name:'BM (UK) 0.064' },
+        'Greenland': { row:5, name:'GL (Denmark) 0.056' },
+        'St. Pierre & Miquelon': { row:5, name:'PM (France) 0.005' },
         } },
         'South': { row:1, type:'single', answers: {
-          'Argentina': { row:1, name:'AR' },
-          'Bolivia': { row:1, name:'BO' },
-          'Brazil': { row:1, name:'BR' },
-          'Chile': { row:2, name:'CL' },
-            'Colombia': { row:2, name:'CO' },
-            'Ecuador': { row:2, name:'EC' },
-            'Falkland Is.': { row:2, name:'FK (UK)' }, 
-          'Fr. Guiana': { row:3, name:'GF (France)' },
-          'Guyana': { row:3, name:'GY' },
-          'Paraguay': { row:3, name:'PY' },  
-          'Peru': { row:3, name:'PE' },          
-            'Suriname': { row:4, name:'SR' },  
-            'Uruguay': { row:4, name:'UY' },
-            'Venezuela': { row:4, name:'VE' },  
+          'Brazil': { row:1, name:'BR 212' },
+            'Colombia': { row:2, name:'CO 52.9' },
+            'Argentina': { row:2, name:'AR 45.7' },
+            'Peru': { row:2, name:'PE 34.2' },  
+            'Venezuela': { row:2, name:'VE 28.4' },  
+          'Chile': { row:3, name:'CL 19.8' },
+          'Ecuador': { row:3, name:'EC 18.1' },
+          'Bolivia': { row:3, name:'BO 12.4' },
+          'Paraguay': { row:3, name:'PY 6.9' }, 
+          'Uruguay': { row:3, name:'UY 3.4' },
+            'Guyana': { row:4, name:'GY 0.8' },
+            'Suriname': { row:4, name:'SR 0.6' },
+            'Fr. Guiana': { row:4, name:'GF (France) 0.3' },
+            'Falkland Is.': { row:4, name:'FK (UK) 0.003' }, 
+            
+            
+             
+                    
+                
+              
+              
         } },
       } },
       'Asia': { row:1, answers: {
-        'East': { row:1, type:'single', answers: {
-          'China': { row:1, name:'CN' },
-          'Japan': { row:1, name:'JP' },
-          'Mongolia': { row:1, name:'MN' },  
-          'North Korea': { row:2, name:'KP' },
-          'South Korea': { row:2, name:'KR' },
-          'Taiwan': { row:2, name:'TW' },  
-        } },
         'Central': { row:1, type:'single', answers: {
-          'Kazakhstan': { row:1, name:'KZ' },
-          'Kyrgyzstan': { row:1, name:'KG' },
-          'Tajikistan': { row:1, name:'TJ' },  
-            'Turkmenistan': { row:2, name:'TM' },
-            'Uzbekistan': { row:2, name:'UZ' }, 
-        } },       
+          'Uzbekistan': { row:1, name:'UZ 36.4' }, 
+          'Kazakhstan': { row:1, name:'KZ 20.6' },
+            'Tajikistan': { row:2, name:'TJ 10.6' },
+            'Kyrgyzstan': { row:2, name:'KG 7.2' },
+            'Turkmenistan': { row:2, name:'TM 7.5' },
+        } },
+        'East': { row:1, type:'single', answers: {
+          'China': { row:1, name:'CN 1409' },
+            'Japan': { row:2, name:'JP 124' },
+            'S. Korea': { row:2, name:'KR 51.8' },
+            'N. Korea': { row:2, name:'KP 26.5' },
+            'Taiwan': { row:2, name:'TW 23.4' },  
+            'Mongolia': { row:2, name:'MN 3.5' },  
+        } },   
         'North': { row:1, type:'single', answers: {
           'Russia': { row:1, name:'RU' },
         } },
         'South': { row:1, type:'single', answers: {
-          'Afghanistan': { row:1, name:'AF' },
-          'Bangladesh': { row:1, name:'BD' },
-          'Bhutan': { row:1, name:'BT' },  
-          'India': { row:1, name:'IN' },
-          //'Iran': { row:2, name:'IR' },
-          'Maldives': { row:2, name:'MV' },
-          'Nepal': { row:2, name:'NP' },
-          'Pakistan': { row:2, name:'PK' },
-          'Sri Lanka': { row:2, name:'LK' },
-          
+          'India': { row:1, name:'IN 1451' },
+            'Pakistan': { row:2, name:'PK 241.5' },
+            'Bangladesh': { row:2, name:'BD 173.6' },
+            'Afghanistan': { row:2, name:'AF 42.7' },
+          'Nepal': { row:3, name:'NP 29.7' },
+          'Sri Lanka': { row:3, name:'LK 21.9' },
+          'Bhutan': { row:3, name:'BT 0.8' },  
+          'Maldives': { row:3, name:'MV 0.5' },
         } },
         'Southeast': { row:1, type:'single', answers: {
-          'Brunei': { row:1, name:'BN' },
-          'Cambodia': { row:1, name:'KH' },
-          'Indonesia': { row:1, name:'ID' },  
-          'Laos': { row:1, name:'LA' },
-            'Malaysia': { row:2, name:'MY' },
-            'Myanmar': { row:2, name:'MM' },
-            'Philippines': { row:2, name:'PH' },
-            'Singapore': { row:3, name:'SG' },
-          'Thailand': { row:3, name:'TH' },
-          'Timor-Leste': { row:3, name:'TL' },
-          'Vietnam': { row:3, name:'VN' },
+          'Indonesia': { row:1, name:'ID 283' },  
+          'Philippines': { row:1, name:'PH 115.8' },
+          'Vietnam': { row:1, name:'VN 101' },
+            'Thailand': { row:2, name:'TH 71.7' },
+            'Myanmar': { row:2, name:'MM 54.5' },
+            'Malaysia': { row:2, name:'MY 35.6' },
+            'Cambodia': { row:2, name:'KH 17.6' },
+          'Brunei': { row:3, name:'BN 0.5' },
+          'Laos': { row:3, name:'LA 7.8' },
+          'Singapore': { row:3, name:'SG 6.0' },
+          'Timor-Leste': { row:3, name:'TL 1.4' },
+            
+            
+          
+          
+          
         } },
-        'West': { row:1, type:'single', answers: {
-          'Armenia': { row:1, name:'AM' },
-          'Azerbaijan': { row:1, name:'AZ' },
-          'Bahrain': { row:1, name:'BH' },  
-          'Cyprus': { row:1, name:'CY' },
-            'Cyprus (TRNC)': { row:2, name:'CY2' },
-            'Georgia': { row:2, name:'GE' },
-            'Iraq': { row:2, name:'IQ' },
-            'Israel': { row:2, name:'IL' },
-            'Jordan': { row:2, name:'JO' },
-          'Kuwait': { row:3, name:'KW' },
-          'Lebanon': { row:3, name:'LB' },
-          'Oman': { row:3, name:'OM' },
-          'Palestine': { row:3, name:'PS' },
-          'Qatar': { row:3, name:'QA' },
-            'Saudi Arabia': { row:4, name:'SA' },
-            'Syria': { row:4, name:'SY' },
-            'Turkey': { row:4, name:'TR' },
-            'UAE': { row:4, name:'AE' },
-            'Yemen': { row:4, name:'YE' }, 
+        'West': { row:1, answers: {
+          'Middle East': { row:1, type:'single', answers: {
+            'Iran': { row:1, name:'IR 89.6' },
+            'Turkey': { row:1, name:'TR 86.5' },
+              'Iraq': { row:2, name:'IQ 46.0' },
+              'Saudi Arabia': { row:2, name:'SA 37.5' },
+              'Yemen': { row:2, name:'YE 34.0' }, 
+              'Syria': { row:2, name:'SY 23.0' },
+            'Jordan': { row:3, name:'JO 11.5' },
+            'UAE': { row:3, name:'AE 10.0' },
+            'Israel': { row:3, name:'IL 9.9' },
+            'Lebanon': { row:3, name:'LB 5.5' },
+              'Palestine': { row:4, name:'PS 5.4' },
+              'Oman': { row:4, name:'OM 4.7' },
+              'Kuwait': { row:4, name:'KW 4.3' },
+              'Qatar': { row:4, name:'QA 3.0' },
+              'Bahrain': { row:4, name:'BH 1.6' },
+          }}, 
+          'South Caucasus': { row:1, type:'single', answers: {
+            'Azerbaijan': { row:1, name:'AZ 10.4' },
+              'Georgia': { row:2, name:'GE 3.7' },
+              'Armenia': { row:2, name:'AM 2.8' },
+              'Abkhazia': { row:2, name:'ABK 0.25' },
+              'South Ossetia': { row:2, name:'SO 0.06' },
+          }},           
         } },
       } },
       'Europe': { row:1, answers: {
         'Eastern': { row:1, type:'single', answers: {
-          'Belarus': { row:1, name:'BY' },
-          'Bulgaria': { row:1, name:'BG' },
-          'Czechia': { row:1, name:'CZ' },  
-          'Hungary': { row:1, name:'HU' },
-            'Moldova': { row:2, name:'MD' },
-            'PMR': { row:2, name:'PL' },
-            'Poland': { row:2, name:'PL' },
-            'Romania': { row:2, name:'RO' },
-          'Russia': { row:3, name:'RU' },
-          'Slovakia': { row:3, name:'SK' },
-          'Ukraine': { row:3, name:'UA' },
+          'Russia': { row:1, name:'RU 143' },
+            'Poland': { row:2, name:'PL 36.6' },
+            'Ukraine': { row:2, name:'UA 37.8' },
+            'Romania': { row:2, name:'RO 19.1' },
+          'Czechia': { row:3, name:'CZ 10.8' },  
+          'Hungary': { row:3, name:'HU 9.6' },
+          'Belarus': { row:3, name:'BY 9' },
+          'Bulgaria': { row:3, name:'BG 6.4' },
+            'Slovakia': { row:4, name:'SK 5.4' },
+            'Moldova': { row:4, name:'MD 2.4' },
+            'Pridnestrovie': { row:4, name:'PL 0.4' },
         } },
         'Northern': { row:1, type:'single', answers: {
-          'United Kingdom': { row:1, name:'GB' },
-          'Denmark': { row:2, name:'DK' }, 
-          'Estonia': { row:2, name:'EE' },
-          'Faroe Is.': { row:2, name:'FO' },  
-          'Finland': { row:2, name:'FI' },
-          'Iceland': { row:2, name:'IS' },
-            'Ireland': { row:3, name:'IE' },
-            'Latvia': { row:3, name:'LV' },
-            'Lithuania': { row:3, name:'LT' },
-            'Norway': { row:3, name:'NO' },
-            'Sweden': { row:3, name:'SE' },
+          'Baltic': { row:1, type:'single', answers:{
+            'Lithuania': { row:3, name:'LT 2.9' },
+            'Latvia': { row:3, name:'LV 1.8' },
+            'Estonia': { row:3, name:'EE 1.3' },
+          } }, 
+          'British Isles': { row:1, type:'single', answers:{
+            'United Kingdom': { row:1, name:'GB 69' },
+            'Ireland': { row:1, name:'IE 5.3' },
+            //'Faroe Is.': { row:2, name:'FO 0.05 (Denmark)' },
+          } }, 
+          
+          'Nordic': { row:1, type:'single', answers:{
+            'Sweden': { row:1, name:'SE 10.6' },
+            'Denmark': { row:1, name:'DK 5.9' }, 
+            'Norway': { row:1, name:'NO 5.6' },
+            'Finland': { row:1, name:'FI 5.6' },
+            'Iceland': { row:1, name:'IS 0.4' },
+          } },
         } },
-        'Southern': { row:1, type:'single', answers: {} },
-        'Western': { row:1, type:'single', answers: {} },        
+        'Southern': { row:1, type:'single', answers: {
+          'Balkans': { row:1, type:'single', answers:{
+            'Greece': { row:1, name:'GR 10.4' },
+            'Serbia': { row:1, name:'RS 6.6' },
+              'Croatia': { row:2, name:'HR 3.9' },
+              'Bosnia & Herzegovina': { row:2, name:'BA 3.2' },
+              'Albania': { row:2, name:'AL 2.7' },
+            'Slovenia': { row:3, name:'SI 2.1' },
+            'North Macedonia': { row:3, name:'MK 1.8' },
+            'Montenegro': { row:3, name:'ME 0.6' }, 
+          } }, 
+          'Cyprus': { row:1, type:'single', answers: {
+            'Republic of Cyprus': { row:1, name:'CY 0.9' },
+            'Turkish Republic of Northern Cyprus': { row:2, name:'CY2 0.4' },
+          }},
+          'Iberia': { row:1, type:'single', answers:{
+            'Spain': { row:1, name:'ES 48.9' },
+            'Portugal': { row:2, name:'PT 10.7' },
+            'Andorra': { row:2, name:'AD 0.08' },
+            'Gibraltar': { row:2, name:'GI 0.04' }, 
+          } }, 
+          'Italy': { row:1, name:'IT 59' },
+          //'San Marino': { row:4, name:'GI 0.03' }, 
+          'Malta': { row:1, name:'MT 0.6' },        
+        } },
+        'Western': { row:1, type:'single', answers: {
+          'Germany': { row:1, name:'DE 83.5' },
+          'France': { row:1, name:'FR 68.5' },
+            'Netherlands': { row:2, name:'NL 17.9' }, 
+            'Belgium': { row:2, name:'BE 11.8' },
+            'Austria': { row:2, name:'AT 9.2' },
+          'Switzerland': { row:3, name:'CH 9.0' },
+          'Luxembourg': { row:3, name:'LU 0.67' },
+          'Liechtenstein': { row:3, name:'LI 0.04' },         
+        } },        
       } },
       'Oceania': { row:1, answers: {
-        //'Australia': { row:1, next:'yourAustralia' },
-        //'New Zealand': { row:4, next:'yourNewZealand' },
-        'Pacific Islands': { row:1, type:'single', answers: {
-          'FJ': { row:1, name:'Fiji' },
-          'PF': { row:1, name:'French Polynesia (France)' },
-          'GU': { row:1, name:'Guam (US)' },
-          'KI': { row:1, name:'Kiribati' },
-          'MH': { row:1, name:'Marshall Islands' },
-          'FM': { row:1, name:'Micronesia' },
-          'NR': { row:1, name:'Nauru' },
-          'NC': { row:1, name:'New Caledonia (France)' },
-          'NU': { row:1, name:'Niue (NZ)' }, 
-          'NF': { row:1, name:'Norfolk Island (Australia)' }, 
-          'MP': { row:1, name:'Northern Mariana Islands (US)' },
-          'PW': { row:1, name:'Palau' },
-          'PG': { row:1, name:'Papua New Guinea' },
-          'PN': { row:1, name:'Pitcairn Islands (UK)' },
-          'WS': { row:1, name:'Samoa' },
-          'SB': { row:1, name:'Solomon Islands' },
-          'TK': { row:1, name:'Tokelau (NZ)' },
-          'TO': { row:1, name:'Tonga' },
-          'TV': { row:1, name:'Tuvalu' },
-          'VU': { row:1, name:'Vanuatu' },
-          'WF': { row:1, name:'Wallis and Futuna (France)' },
-        } },
+        'Australia': { row:1, name:'AU 27.0' },
+          'Papua New Guinea': { row:2, name:'PG 10.3' },
+          'New Zealand': { row:2, name:'NZ 5.3' },
+          'Fiji': { row:2, name:'FJ 0.93' },
+        'Solomon': { row:3, name:'SB 0.74' },
+        'Vanuatu': { row:3, name:'VU 0.33' },
+        'French Polynesia': { row:3, name:'PF (FR) 0.30' },
+          'New Caledonia': { row:4, name:'NC (FR) 0.27' },
+          'Samoa': { row:4, name:'WS 0.22' },
+          'Guam': { row:4, name:'GU (US) 0.17' },
+          'Kiribati': { row:4, name:'KI 0.13' },
+        'Micronesia': { row:5, name:'FM 0.11' },
+        'Tonga': { row:5, name:'TO 0.10' },
+        'Marshall': { row:5, name:'MH 0.06' },
+        'N. Mariana': { row:5, name:'MP (US) 0.05' },
+          'American Samoa': { row:6, name:'AS (US) 0.05' },
+          'Palau': { row:6, name:'PW 0.02' },
+          'Nauru': { row:6, name:'NR 0.013' },
+        'Wallis & Futuna': { row:7, name:'WF (FR) 0.012' },
+        'Tuvalu': { row:7, name:'TV 0.011' },
+        'Pitcairn': { row:7, name:'PN (UK) 0.00005' },
+        //'Pacific Islands': { row:1, type:'single', answers: {
+        //  'TK': { row:1, name:'Tokelau (NZ)' },
+        //  'NU': { row:1, name:'Niue (NZ)' }, 
+        //  'NF': { row:1, name:'Norfolk Island (Australia)' }, 
+        //} },
       } },
     },
   }, 
@@ -374,21 +447,27 @@ const profile = {
   },
 };
 
-function resetAnswers(q) {
-  Object.values(q.answers).forEach(a => {
-    a.picked = false;
-    if ('answers' in a) {
-      Object.values(a.answers).forEach(b => {
-        b.picked = false;
-        if ('answers' in b) {
-          Object.values(b.answers).forEach(c => {
-            c.picked = false;
-          });
-        }
-      });
-    }
-  }); 
+function resetAnswers(parent) {
+  Object.values(parent.answers).forEach(child => {
+    child.picked = false;
+    if ('answers' in child) resetAnswers(child);
+  });
 }
+//function resetAnswers(q) {
+//  Object.values(q.answers).forEach(a => {
+//    a.picked = false;
+//    if ('answers' in a) {
+//      Object.values(a.answers).forEach(b => {
+//        b.picked = false;
+//        if ('answers' in b) {
+//          Object.values(b.answers).forEach(c => {
+//            c.picked = false;
+//          });
+//        }
+//      });
+//    }
+//  }); 
+//}
   
 function resetProfile(profile) {
   Object.values(profile).forEach(q => {
@@ -398,39 +477,55 @@ function resetProfile(profile) {
 
 function isPicked(parent) {
   let status = false;
-  Object.values(parent.answers).forEach(a => {
-    if (a.picked) {
+  Object.values(parent.answers).forEach(child => {
+    if (child.picked) {
       status = true;
+    } else {
+      if ('answers' in child) {
+        status = isPicked(child);
+      }
     }
   });
   return status;
 }
 
 function unhideChilds(parent) {
-  Object.values(parent.answers).forEach(child => {
-    unhide(child);
-  });
+  if ('answers' in parent) {
+    Object.values(parent.answers).forEach(child => {
+      unhide(child);
+    });
+  }
 }
 function hideChilds(parent) {
-  Object.values(parent.answers).forEach(child => {
-    if ('answers' in child) hideChilds(child);
-    hide(child);
-  });
+  if ('answers' in parent) {
+    Object.values(parent.answers).forEach(child => {
+      if ('answers' in child) hideChilds(child);
+      hide(child);
+    });
+  }
 }
 function unpickChilds(parent) {
   Object.values(parent.answers).forEach(child => {
-    if ('answers' in child) {
-      unpickChilds(child);
-    }
+    if ('answers' in child) unpickChilds(child);
     unpick(child);
   });
 }
 function unpick(child) {
-  child.btn.classList.remove('selected');
+  if ('answers' in child) {
+    child.btn.classList.remove('active'); 
+  } else {
+    child.btn.classList.remove('selected');
+  }
   child.picked = false;
 }
+
 function pick(child) {
-  child.btn.classList.add('selected'); 
+  //let level = parseInt(child.btn.classList[0].split('-').at(-1), 10);
+  if ('answers' in child) {
+    child.btn.classList.add('active'); 
+  } else {
+    child.btn.classList.add('selected'); 
+  }
   child.picked = true;
 }
 
@@ -445,36 +540,27 @@ function hide(child) {
 
 
 function tapAnswer(parent, child) {
-  if ('answers' in child) {
+  if (!('type' in parent)||(parent.type==='single')) {
     if (child.picked) {
       hideChilds(child);
       unpick(child);
+      //qFuture.shift();
     } else {
       hideChilds(parent);
       unpickChilds(parent);
       unhideChilds(parent);
       pick(child);
       unhideChilds(child);
+      //qFuture.unshift(child.next);
     }
   } else {
-    if (parent.type === 'single') {
-      if (child.picked) {
-        unpick(child);
-        //qFuture.shift();
-      } else {
-        unpickChilds(parent);
-        pick(child);
-        //qFuture.unshift(child.next);
-      }
+    if (child.picked) {
+      unpick(child);
+      //qFuture.shift();
     } else {
-      if (child.picked) {
-        unpick(child);
-        //qFuture.shift();
-      } else {
-        pick(child);
-        //qFuture.unshift(child.next);
-      } 
-    }
+      pick(child);
+      //qFuture.unshift(child.next);
+    } 
   }
   //nextButton.disabled = !isPicked(parent);
   //tg.sendData(JSON.stringify(answers));
@@ -537,16 +623,12 @@ function addSVG(button, text, size) {
 
 function addButtons(object, mode='') {
   Object.keys(object).forEach(parentText => {
-    //const R2BB = {};
     Object.keys(object[parentText]).forEach(r => { 
       let div = document.createElement('div');
       div.className = 'row';
       if (mode==='hiden') div.classList.add('hidden');
-      for (const b of object[parentText][r]) {
-        //b.textContent = parentText+''+r+b.textContent; 
+      for (const b of object[parentText][r]) { 
         div.appendChild(b); 
-        //if (!(r in R2BB)) R2BB[r] = [];
-        //R2BB[r].push(b);
       }
       answersContainer.appendChild(div);
     });
@@ -559,13 +641,14 @@ function addButtons(object, mode='') {
     //});
   });
 }
-  
 
-function push(object, r, parent, child, parentText, childText) {
+function push(object, r, parent, child, parentText, childText, level) {
   child.btn = document.createElement('button');
   //addSVG(child.btn, childText, 16);
-  child.btn.textContent = childText; 
-  child.btn.className = `answer-button-${getType(parent)}`;
+  //child.btn.textContent = level; 
+  child.btn.textContent = childText;
+  child.btn.className = `answer-${getType(parent)}`;
+  child.btn.classList.add(`level-${level}`); 
   //a.btn.disabled = !a.next;
   if (child.picked) child.btn.classList.add('selected');
   child.btn.onclick = () => tapAnswer(parent, child);
@@ -591,26 +674,38 @@ function show() {
   const dA = {};
   const dB = {};
   const dC = {};
+  const dD = {};
   for (let r1 = 1; r1 <= maxRow; r1++) {
     Object.keys(q.answers).forEach(aText => {
       const a = q.answers[aText];
       if (a.row == r1) {
         const text = qPresent;
-        push(dA,r1,q,a,text,aText);
+        push(dA,r1,q,a,text,aText,1);
         if ('answers' in a) {
           for (let r2 = 1; r2 <= maxRow; r2++) {
             Object.keys(a.answers).forEach(bText => {
               const b = a.answers[bText];
               if (b.row == r2) {
                 const text = `${qPresent}:${aText}`;
-                push(dB,r2,a,b,text,bText);
+                push(dB,r2,a,b,text,bText,2);
                 if ('answers' in b) {
                   for (let r3 = 1; r3 <= maxRow; r3++) {
                     Object.keys(b.answers).forEach(cText => {
                       const c = b.answers[cText];
                       if (c.row == r3) {
                         const text = `${qPresent}:${aText}:${bText}`;
-                        push(dC,r3,b,c,text,cText);
+                        push(dC,r3,b,c,text,cText,3);
+                        if ('answers' in c) {
+                          for (let r4 = 1; r4 <= maxRow; r4++) {
+                            Object.keys(c.answers).forEach(dText => {
+                              const d = c.answers[dText];
+                              if (d.row == r4) {
+                                const text = `${qPresent}:${aText}:${bText}:${cText}`;
+                                push(dD,r4,c,d,text,dText,4);
+                              }
+                            });
+                          }
+                        }
                       } 
                     });
                   }
@@ -625,6 +720,7 @@ function show() {
   addButtons(dA);
   addButtons(dB,'hiden');
   addButtons(dC,'hiden');
+  addButtons(dD,'hiden');
 }
 
 
