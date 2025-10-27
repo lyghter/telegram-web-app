@@ -14,16 +14,66 @@
       <div class="progress-text" id="progressText"></div>
     </div>
     -->
-    <div class="carousel-container">
-      <div class="carousel">
-        <div class="carousel-item">Россия</div>
-        <div class="carousel-item">США</div>
-        <div class="carousel-item">Германия</div>
-        <div class="carousel-item">Франция</div>
-        <div class="carousel-item">Япония</div>
-        <div class="carousel-item">Китай</div>
-      </div>
-    </div>
+    
+  <div class="wrapper" style="height:200px; overflow:hidden;">
+    <ul class="content">
+      <li>Страна 1</li>
+      <li>Страна 2</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+            <li>Страна 1</li>
+      <li>Страна 2</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <li>Страна 3</li>
+      <!-- ... -->
+    </ul>
+  </div>
+
+<script>
+  const scroll = new BScroll('.wrapper', {
+    scrollY: true,   // вертикальная прокрутка
+    mouseWheel: true, // поддержка колесика
+    click: true,     // клики по элементам
+  });
+</script>
+
+
     
     <div class="question">
       <div class="question-text" id="questionText"></div>
@@ -46,6 +96,7 @@
     </div>
     
   </div>
+  <script src="https://unpkg.com/better-scroll@2.5.1/dist/better-scroll.min.js"></script>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script type="module" src="script.js"></script>
 </body>

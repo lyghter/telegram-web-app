@@ -1,49 +1,5 @@
 
 
-const carousel = document.querySelector('.carousel');
-const items = document.querySelectorAll('.carousel-item');
-let currentIndex = 0;
-
-let startX = 0;
-let isDragging = false;
-
-function updateCarousel() {
-  const itemWidth = items[0].offsetWidth;
-  carousel.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-  
-  items.forEach(item => item.classList.remove('active'));
-  items[currentIndex].classList.add('active');
-}
-
-// События для сенсорного экрана
-carousel.addEventListener('touchstart', e => {
-  startX = e.touches[0].clientX;
-  isDragging = true;
-});
-
-carousel.addEventListener('touchmove', e => {
-  if (!isDragging) return;
-  const currentX = e.touches[0].clientX;
-  const diff = currentX - startX;
-  carousel.style.transform = `translateX(${-currentIndex * items[0].offsetWidth + diff}px)`;
-});
-
-carousel.addEventListener('touchend', e => {
-  const endX = e.changedTouches[0].clientX;
-  const diff = endX - startX;
-
-  if (diff > 50) {
-    currentIndex = Math.max(0, currentIndex - 1);
-  } else if (diff < -50) {
-    currentIndex = Math.min(items.length - 1, currentIndex + 1);
-  }
-  updateCarousel();
-  isDragging = false;
-});
-
-// Инициализация
-updateCarousel();
-
 
 
 const btn = document.getElementById('ipButton');
@@ -58,7 +14,7 @@ fetch('https://ipinfo.io?token=f8403e031dcb69')
     console.error(err);
   });
 
-const ver = 'v54';
+const ver = 'v55';
 
 const tg = window.Telegram.WebApp;
 
