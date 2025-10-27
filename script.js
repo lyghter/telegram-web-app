@@ -1,6 +1,37 @@
 
 
+// Элемент контейнера
+const wrapper = document.querySelector('.wheel-wrapper');
 
+// Подключаем плагин Wheel
+BScroll.use(Wheel);
+
+// Инициализация BetterScroll с колесом
+const bs = new BScroll(wrapper, {
+  wheel: {
+    wheelWrapperClass: 'wheel-scroll',
+    wheelItemClass: 'wheel-item',
+    selectedIndex: 0, // начальный выбранный элемент
+    adjustTime: 300
+  },
+  mouseWheel: true, // поддержка мышью
+  probeType: 3,
+});
+
+// Следим за выбранным элементом и добавляем класс active
+function updateActiveItem() {
+  const items = wrapper.querySelectorAll('.wheel-item');
+  const index = bs.getSelectedIndex();
+  items.forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+  });
+}
+
+// Вызываем при прокрутке
+bs.on('scrollEnd', updateActiveItem);
+
+// Обновляем сразу после инициализации
+updateActiveItem();
 
 const btn = document.getElementById('ipButton');
 
@@ -14,7 +45,7 @@ fetch('https://ipinfo.io?token=f8403e031dcb69')
     console.error(err);
   });
 
-const ver = 'v55';
+const ver = 'v56';
 
 const tg = window.Telegram.WebApp;
 
