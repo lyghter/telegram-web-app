@@ -1,6 +1,64 @@
 
 
-const ver = 'v53';
+const carousel = document.querySelector('.carousel');
+const items = document.querySelectorAll('.carousel-item');
+let currentIndex = 0;
+
+let startX = 0;
+let isDragging = false;
+
+function updateCarousel() {
+  const itemWidth = items[0].offsetWidth;
+  carousel.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+  
+  items.forEach(item => item.classList.remove('active'));
+  items[currentIndex].classList.add('active');
+}
+
+// События для сенсорного экрана
+carousel.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+  isDragging = true;
+});
+
+carousel.addEventListener('touchmove', e => {
+  if (!isDragging) return;
+  const currentX = e.touches[0].clientX;
+  const diff = currentX - startX;
+  carousel.style.transform = `translateX(${-currentIndex * items[0].offsetWidth + diff}px)`;
+});
+
+carousel.addEventListener('touchend', e => {
+  const endX = e.changedTouches[0].clientX;
+  const diff = endX - startX;
+
+  if (diff > 50) {
+    currentIndex = Math.max(0, currentIndex - 1);
+  } else if (diff < -50) {
+    currentIndex = Math.min(items.length - 1, currentIndex + 1);
+  }
+  updateCarousel();
+  isDragging = false;
+});
+
+// Инициализация
+updateCarousel();
+
+
+
+const btn = document.getElementById('ipButton');
+
+fetch('https://ipinfo.io?token=f8403e031dcb69')
+  .then(res => res.json())
+  .then(data => {
+    btn.textContent = `${data.ip} — ${data.country}, ${data.region}`;
+  })
+  .catch(err => {
+    btn.textContent = "Не удалось определить IP";
+    console.error(err);
+  });
+
+const ver = 'v54';
 
 const tg = window.Telegram.WebApp;
 
@@ -28,381 +86,7 @@ let qPresent = 'whereDoYouLive';
 const qFuture = [];
 
 const profile = {
-  whereDoYouLive: {
-    text: 'Your location',
-    type: 'single',
-    answers: { 
-      'Africa': { row:1, answers: {
-        'Central': { row:1, type:'single', answers: {
-          'DR Congo': { row:1, name:'CD 109' },
-          'Angola': { row:1, name:'AO 38' },
-          'Cameroon': { row:1, name:'CM 29' },
-            'Chad': { row:2, name:'TD 20' },
-            'Congo': { row:2, name:'CG 6' },
-            'CAR': { row:2, name:'CF 5.3' },
-            'Gabon': { row:2, name:'GA 2.4' },
-          'Equatorial Guinea': { row:3, name:'GQ 1.9' },
-          'São Tomé and Príncipe': { row:3, name:'ST 0.2' },
-        } },
-        'East': { row:1, type:'single', answers: {
-            'Ethiopia': { row:2, name:'ET 132' },
-          'Tanzania': { row:2, name:'TZ 68.6' },
-          'Kenya': { row:2, name:'KE 56.4' },
-          'Uganda': { row:2, name:'UG 50' }, 
-            'Mozambique': { row:3, name:'MZ 34.6' }, 
-            'Madagascar': { row:3, name:'MG 31.9' },
-            'Malawi': { row:3, name:'MW 21.7' }, 
-            'Zambia': { row:3, name:'ZM 21.3' },
-          'Somalia': { row:4, name:'SO 19' },
-          'Zimbabwe': { row:4, name:'ZW 16.6' },
-          'Rwanda': { row:4, name:'RW 14.3' },
-          'Burundi': { row:4, name:'BI 14.1' },
-            'S. Sudan': { row:5, name:'SS 11.9' },
-            'Eritrea': { row:5, name:'ER 3.5' },
-            'Mauritius': { row:5, name:'MU 1.3' }, 
-            'Djibouti': { row:5, name:'DJ 1.2' },
-          'Comoros': { row:6, name:'KM 0.9' },
-          'Réunion': { row:6, name:'RE (FR) 0.9' },
-          'Mayotte': { row:6, name:'YT (FR) 0.3' },
-          'Seychelles': { row:6, name:'SC 0.1' },
-        } },
-        'North': { row:1, type:'single', answers: {
-            'Egypt': { row:1, name:'EG 116.5' },
-            'Sudan': { row:1, name:'SD 50.5' },
-            'Algeria': { row:1, name:'DZ 46.8' },
-            'Morocco': { row:1, name:'MA 38.1' },
-              'Tunisia': { row:2, name:'TN 12.3' },
-              'Libya': { row:2, name:'LY 7.4' },
-              'Mauritania': { row:2, name:'MR 5.2' },
-              'SADR': { row:2, name:'EH (disputed territory) 0.5' }, 
-        } },
-        'South': { row:1, type:'single', answers: {
-          'Republic of South Africa': { row:1, name:'ZA 63' },
-            'Namibia': { row:2, name:'NA 3.0' },
-            'Botswana ': { row:2, name:'BW 2.5' },
-            'Lesotho': { row:2, name:'LS 2.3' },
-            'Eswatini': { row:2, name:'SZ (Swaziland) 1.2' },
-        } },
-        'West': { row:1, type:'single', answers: {
-          'Nigeria': { row:1, name:'NG 232.7' },
-            'Ghana': { row:2, name:'GH 34.4' },
-            'Côte d’Ivoire': { row:2, name:'CI 31.9' },
-            'Burkina Faso': { row:2, name:'BF 23.6' },
-          'Niger': { row:3, name:'NE 27.0' },
-          'Mali': { row:3, name:'ML 24.5' },
-          'Senegal': { row:3, name:'SN 18.5' },
-          'Benin': { row:3, name:'BJ 14.5' },
-          'Guinea': { row:3, name:'GN 14.8' },
-            'Togo': { row:4, name:'TG 9.5' },
-            'Sierra Leone': { row:4, name:'SL 8.6' },
-            'Liberia': { row:4, name:'LR 5.4' },
-            'Gambia': { row:4, name:'GM 2.8' },
-          'Guinea-Bissau': { row:5, name:'GW 2.0' },
-          'Cabo Verde': { row:5, name:'CV 0.5' },
-          'Saint Helena': { row:5, name:'SH (UK) 0.04' },
-        } },
-      }},
-      'America': { row:1, answers: {
-        'Carribean': { row:1, type:'single', answers: {
-          'Haiti': { row:1, name:'HT 11.0' },
-          'Cuba': { row:1, name:'CU 11.0' },
-          'Dominican Rep.': { row:1, name:'DO 10.9' },
-            'Puerto Rico': { row:2, name:'PR (US) 3.3' },
-            'Jamaica': { row:2, name:'JM 2.8' },
-            'Trinidad & Tobago': { row:2, name:'TT 1.5' },
-          'Bahamas': { row:3, name:'BS 0.42' },
-          'Guadeloupe': { row:3, name:'GP (FR) 0.38' },
-          'Martinique': { row:3, name:'MQ (FR) 0.37' },
-          'Barbados': { row:3, name:'BB 0.28' },
-            'St. Lucia': { row:4, name:'LC 0.18' },
-            'Curaçao': { row:4, name:'CW (NE) 0.16' },
-            'Grenada': { row:4, name:'GD 0.13' },
-            'Aruba': { row:4, name:'AW (NL) 0.11' },
-            'Cayman': { row:4, name:'KY (UK) 0.08' },
-          'St. Vincent & the Grenadines': { row:5, name:'VC 0.11' },
-          'Antigua & Barbuda': { row:5, name:'AG 0.10' },
-            'Dominica': { row:6, name:'DM 0.07' },
-            'Turks & Caicos': { row:6, name:'TC (UK) 0.06' },
-            'Virgin (US)': { row:6, name:'VI (US) 0.10' }, 
-            'Virgin (UK)': { row:7, name:'VG (UK) 0.03' },
-          'St. Martin (FR)': { row:7, name:'MF (FR part) 0.04' },
-          'St. Maarten (NL)': { row:7, name:'SX (NL part) 0.04' },
-            'St. Kitts & Nevis': { row:8, name:'KN 0.06' },
-            'Caribbean Netherlands': { row:8, name:'BQ (NL) 0.03' },
-          'Anguilla': { row:9, name:'AI (UK) 0.02' },
-          'St. Barthélemy': { row:9, name:'BL (FR) 0.01' },
-          'Montserrat': { row:9, name:'MS (UK) 0.005' },
-          
-          
-          
-          
-          
-            
-            
-                      
-            
-          
-          
-          
-          
-          
-          
-          
-              
-            
-          
-          
-            
-            
-             
-          
-          
-          
-          //'AG': { row:1, name:'Antigua and Barbuda' },
-          //'AI': { row:1, name:'Anguilla (UK)' },
-          //'AW': { row:1, name:'Aruba (Netherlands)' },
-          //'BS': { row:1, name:'Bahamas' },
-          //'BB': { row:1, name:'Barbados' },
-          //'BM': { row:1, name:'Bermuda (UK)' },
-          //'BQ': { row:1, name:'Bonaire, Sint Eustatius and Saba (Netherlands)' },
-          //'VG': { row:1, name:'British Virgin Islands (UK)' },
-          //'KY': { row:1, name:'Cayman Islands (UK)' },
-          //'CU': { row:1, name:'Cuba' },
-          //'CW': { row:1, name:'Curaçao (Netherlands)' },
-          //'DM': { row:1, name:'Dominica' },
-          //'DO': { row:1, name:'Dominican Republic' },
-          //'GD': { row:1, name:'Grenada' },
-          //'GP': { row:1, name:'Guadeloupe (France)' },
-          //'HT': { row:1, name:'Haiti' },
-          //'JM': { row:1, name:'Jamaica' },
-          //'MQ': { row:1, name:'Martinique (France)' },
-          //'MS': { row:1, name:'Montserrat (UK)' },
-          //'PR': { row:1, name:'Puerto Rico (US)' },
-          //'BL': { row:1, name:'Saint Barthélemy (France)' },
-          //'KN': { row:1, name:'Saint Kitts and Nevis' },
-          //'LC': { row:1, name:'Saint Lucia' },
-          //'MF': { row:1, name:'Saint Martin (French part)' },   
-          //'VC': { row:1, name:'Saint Vincent and the Grenadines' },
-          //'SX': { row:1, name:'Sint Maarten (Dutch part)' },  
-          //'TT': { row:1, name:'Trinidad and Tobago' },
-          //'TC': { row:1, name:'Turks and Caicos Islands (UK)' },  
-          //'VI': { row:1, name:'United States Virgin Islands (US)' },
-          
-        } },
-        'North': { row:1, type:'single', answers: {
-          'United States': { row:1, name:'US 340' },
-            'Mexico': { row:2, name:'MX 130.9' },
-            'Canada': { row:2, name:'CA 41.3' },
-        'Guatemala': { row:3, name:'GT 18.4' },
-        'Honduras': { row:3, name:'HN 10.8' },
-        'Nicaragua': { row:3, name:'NI 6.9' },
-          'El Salvador': { row:4, name:'SV 6.3' },
-          'Costa Rica': { row:4, name:'CR 5.0' },
-          'Panama': { row:4, name:'PA 4.5' },
-          'Belize': { row:4, name:'BZ 0.4' },
-        'Bermuda': { row:5, name:'BM (UK) 0.064' },
-        'Greenland': { row:5, name:'GL (Denmark) 0.056' },
-        'St. Pierre & Miquelon': { row:5, name:'PM (France) 0.005' },
-        } },
-        'South': { row:1, type:'single', answers: {
-          'Brazil': { row:1, name:'BR 212' },
-            'Colombia': { row:2, name:'CO 52.9' },
-            'Argentina': { row:2, name:'AR 45.7' },
-            'Peru': { row:2, name:'PE 34.2' },  
-            'Venezuela': { row:2, name:'VE 28.4' },  
-          'Chile': { row:3, name:'CL 19.8' },
-          'Ecuador': { row:3, name:'EC 18.1' },
-          'Bolivia': { row:3, name:'BO 12.4' },
-          'Paraguay': { row:3, name:'PY 6.9' }, 
-          'Uruguay': { row:3, name:'UY 3.4' },
-            'Guyana': { row:4, name:'GY 0.8' },
-            'Suriname': { row:4, name:'SR 0.6' },
-            'Fr. Guiana': { row:4, name:'GF (France) 0.3' },
-            'Falkland Is.': { row:4, name:'FK (UK) 0.003' }, 
-            
-            
-             
-                    
-                
-              
-              
-        } },
-      } },
-      'Asia': { row:1, answers: {
-        'Central': { row:1, type:'single', answers: {
-          'Uzbekistan': { row:1, name:'UZ 36.4' }, 
-          'Kazakhstan': { row:1, name:'KZ 20.6' },
-            'Tajikistan': { row:2, name:'TJ 10.6' },
-            'Kyrgyzstan': { row:2, name:'KG 7.2' },
-            'Turkmenistan': { row:2, name:'TM 7.5' },
-        } },
-        'East': { row:1, type:'single', answers: {
-          'China': { row:1, name:'CN 1409' },
-            'Japan': { row:2, name:'JP 124' },
-            'S. Korea': { row:2, name:'KR 51.8' },
-            'N. Korea': { row:2, name:'KP 26.5' },
-            'Taiwan': { row:2, name:'TW 23.4' },  
-            'Mongolia': { row:2, name:'MN 3.5' },  
-        } },   
-        'North': { row:1, type:'single', answers: {
-          'Russia': { row:1, name:'RU' },
-        } },
-        'South': { row:1, type:'single', answers: {
-          'India': { row:1, name:'IN 1451' },
-            'Pakistan': { row:2, name:'PK 241.5' },
-            'Bangladesh': { row:2, name:'BD 173.6' },
-            'Afghanistan': { row:2, name:'AF 42.7' },
-          'Nepal': { row:3, name:'NP 29.7' },
-          'Sri Lanka': { row:3, name:'LK 21.9' },
-          'Bhutan': { row:3, name:'BT 0.8' },  
-          'Maldives': { row:3, name:'MV 0.5' },
-        } },
-        'Southeast': { row:1, type:'single', answers: {
-          'Indonesia': { row:1, name:'ID 283' },  
-          'Philippines': { row:1, name:'PH 115.8' },
-          'Vietnam': { row:1, name:'VN 101' },
-            'Thailand': { row:2, name:'TH 71.7' },
-            'Myanmar': { row:2, name:'MM 54.5' },
-            'Malaysia': { row:2, name:'MY 35.6' },
-            'Cambodia': { row:2, name:'KH 17.6' },
-          'Brunei': { row:3, name:'BN 0.5' },
-          'Laos': { row:3, name:'LA 7.8' },
-          'Singapore': { row:3, name:'SG 6.0' },
-          'Timor-Leste': { row:3, name:'TL 1.4' },
-            
-            
-          
-          
-          
-        } },
-        'West': { row:1, answers: {
-          'Middle East': { row:1, type:'single', answers: {
-            'Iran': { row:1, name:'IR 89.6' },
-            'Turkey': { row:1, name:'TR 86.5' },
-              'Iraq': { row:2, name:'IQ 46.0' },
-              'Saudi Arabia': { row:2, name:'SA 37.5' },
-              'Yemen': { row:2, name:'YE 34.0' }, 
-              'Syria': { row:2, name:'SY 23.0' },
-            'Jordan': { row:3, name:'JO 11.5' },
-            'UAE': { row:3, name:'AE 10.0' },
-            'Israel': { row:3, name:'IL 9.9' },
-            'Lebanon': { row:3, name:'LB 5.5' },
-              'Palestine': { row:4, name:'PS 5.4' },
-              'Oman': { row:4, name:'OM 4.7' },
-              'Kuwait': { row:4, name:'KW 4.3' },
-              'Qatar': { row:4, name:'QA 3.0' },
-              'Bahrain': { row:4, name:'BH 1.6' },
-          }}, 
-          'South Caucasus': { row:1, type:'single', answers: {
-            'Azerbaijan': { row:1, name:'AZ 10.4' },
-              'Georgia': { row:2, name:'GE 3.7' },
-              'Armenia': { row:2, name:'AM 2.8' },
-              'Abkhazia': { row:2, name:'ABK 0.25' },
-              'South Ossetia': { row:2, name:'SO 0.06' },
-          }},           
-        } },
-      } },
-      'Europe': { row:1, answers: {
-        'Eastern': { row:1, type:'single', answers: {
-          'Russia': { row:1, name:'RU 143' },
-            'Poland': { row:2, name:'PL 36.6' },
-            'Ukraine': { row:2, name:'UA 37.8' },
-            'Romania': { row:2, name:'RO 19.1' },
-          'Czechia': { row:3, name:'CZ 10.8' },  
-          'Hungary': { row:3, name:'HU 9.6' },
-          'Belarus': { row:3, name:'BY 9' },
-          'Bulgaria': { row:3, name:'BG 6.4' },
-            'Slovakia': { row:4, name:'SK 5.4' },
-            'Moldova': { row:4, name:'MD 2.4' },
-            'Pridnestrovie': { row:4, name:'PL 0.4' },
-        } },
-        'Northern': { row:1, type:'single', answers: {
-          'Baltic': { row:1, type:'single', answers:{
-            'Lithuania': { row:3, name:'LT 2.9' },
-            'Latvia': { row:3, name:'LV 1.8' },
-            'Estonia': { row:3, name:'EE 1.3' },
-          } }, 
-          'British Isles': { row:1, type:'single', answers:{
-            'United Kingdom': { row:1, name:'GB 69' },
-            'Ireland': { row:1, name:'IE 5.3' },
-            //'Faroe Is.': { row:2, name:'FO 0.05 (Denmark)' },
-          } }, 
-          
-          'Nordic': { row:1, type:'single', answers:{
-            'Sweden': { row:1, name:'SE 10.6' },
-            'Denmark': { row:1, name:'DK 5.9' }, 
-            'Norway': { row:1, name:'NO 5.6' },
-            'Finland': { row:1, name:'FI 5.6' },
-            'Iceland': { row:1, name:'IS 0.4' },
-          } },
-        } },
-        'Southern': { row:1, type:'single', answers: {
-          'Balkans': { row:1, type:'single', answers:{
-            'Greece': { row:1, name:'GR 10.4' },
-            'Serbia': { row:1, name:'RS 6.6' },
-              'Croatia': { row:2, name:'HR 3.9' },
-              'Bosnia & Herzegovina': { row:2, name:'BA 3.2' },
-              'Albania': { row:2, name:'AL 2.7' },
-            'Slovenia': { row:3, name:'SI 2.1' },
-            'North Macedonia': { row:3, name:'MK 1.8' },
-            'Montenegro': { row:3, name:'ME 0.6' }, 
-          } }, 
-          'Cyprus': { row:1, type:'single', answers: {
-            'Republic of Cyprus': { row:1, name:'CY 0.9' },
-            'Turkish Republic of Northern Cyprus': { row:2, name:'CY2 0.4' },
-          }},
-          'Iberia': { row:1, type:'single', answers:{
-            'Spain': { row:1, name:'ES 48.9' },
-            'Portugal': { row:2, name:'PT 10.7' },
-            'Andorra': { row:2, name:'AD 0.08' },
-            'Gibraltar': { row:2, name:'GI 0.04' }, 
-          } }, 
-          'Italy': { row:1, name:'IT 59' },
-          //'San Marino': { row:4, name:'GI 0.03' }, 
-          'Malta': { row:1, name:'MT 0.6' },        
-        } },
-        'Western': { row:1, type:'single', answers: {
-          'Germany': { row:1, name:'DE 83.5' },
-          'France': { row:1, name:'FR 68.5' },
-            'Netherlands': { row:2, name:'NL 17.9' }, 
-            'Belgium': { row:2, name:'BE 11.8' },
-            'Austria': { row:2, name:'AT 9.2' },
-          'Switzerland': { row:3, name:'CH 9.0' },
-          'Luxembourg': { row:3, name:'LU 0.67' },
-          'Liechtenstein': { row:3, name:'LI 0.04' },         
-        } },        
-      } },
-      'Oceania': { row:1, answers: {
-        'Australia': { row:1, name:'AU 27.0' },
-          'Papua New Guinea': { row:2, name:'PG 10.3' },
-          'New Zealand': { row:2, name:'NZ 5.3' },
-          'Fiji': { row:2, name:'FJ 0.93' },
-        'Solomon': { row:3, name:'SB 0.74' },
-        'Vanuatu': { row:3, name:'VU 0.33' },
-        'French Polynesia': { row:3, name:'PF (FR) 0.30' },
-          'New Caledonia': { row:4, name:'NC (FR) 0.27' },
-          'Samoa': { row:4, name:'WS 0.22' },
-          'Guam': { row:4, name:'GU (US) 0.17' },
-          'Kiribati': { row:4, name:'KI 0.13' },
-        'Micronesia': { row:5, name:'FM 0.11' },
-        'Tonga': { row:5, name:'TO 0.10' },
-        'Marshall': { row:5, name:'MH 0.06' },
-        'N. Mariana': { row:5, name:'MP (US) 0.05' },
-          'American Samoa': { row:6, name:'AS (US) 0.05' },
-          'Palau': { row:6, name:'PW 0.02' },
-          'Nauru': { row:6, name:'NR 0.013' },
-        'Wallis & Futuna': { row:7, name:'WF (FR) 0.012' },
-        'Tuvalu': { row:7, name:'TV 0.011' },
-        'Pitcairn': { row:7, name:'PN (UK) 0.00005' },
-        //'Pacific Islands': { row:1, type:'single', answers: {
-        //  'TK': { row:1, name:'Tokelau (NZ)' },
-        //  'NU': { row:1, name:'Niue (NZ)' }, 
-        //  'NF': { row:1, name:'Norfolk Island (Australia)' }, 
-        //} },
-      } },
-    },
-  }, 
-  //Melanesia Micronesia Polynesia
+  
   yourCountry: {
     text: 'Your location',
     type: 'single',
